@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryan Sharma | UX Designer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0e0e0e;
+            --text-color: #f3f3f3;
+            --accent-color: #dddddd;
+            --secondary-text: #888888;
+            --font-main: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: none;
+            /* Hide default cursor */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* SVG Filter for Noise (Hidden but referenced) */
+        .noise-filter-def {
+            position: absolute;
+            width: 0;
+            height: 0;
+            pointer-events: none;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Custom Dot Cursor */
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            transition: transform 0.1s ease;
+        }
+
+        /* Animation Classes */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-5 {
+            animation-delay: 0.5s;
+        }
+
+        .delay-6 {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 4rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: transparent;
+            transition: all 0.4s ease;
+            color: #fff;
+            /* Ensure mix-blend-mode doesn't conflict with glass effect, we might remove it for the scrolled state or handle carefully */
+            mix-blend-mode: difference;
+        }
+
+        /* Liquid Glass Effect for Navbar */
+        nav.scrolled {
+            padding: 1.5rem 4rem;
+            background: rgba(20, 20, 20, 0.3);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            mix-blend-mode: normal;
+            /* Reset mix-blend-mode to let background show */
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-item {
+            font-size: 0.9rem;
+            position: relative;
+            padding-bottom: 5px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        .btn-touch {
+            background: #fff;
+            color: #000;
+            padding: 0.8rem 1.5rem;
+            /* Increased height */
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-touch span {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-touch::before {
+            content: '→';
+            position: absolute;
+            left: -20px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .btn-touch:hover {
+            background: transparent;
+            color: #fff;
+            border-color: #fff;
+        }
+
+        .btn-touch:hover span {
+            transform: translateX(10px);
+        }
+
+        .btn-touch:hover::before {
+            left: 15px;
+            opacity: 1;
+        }
+
+        /* Hero */
+        #home {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 4rem;
+            position: relative;
+            overflow: hidden;
+            /* Ensure canvas doesn't overflow */
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 8rem);
+            line-height: 0.9;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        h1 span.highlight {
+            font-weight: 600;
+        }
+
+        .hero-desc {
+            max-width: 600px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #aaa;
+            margin-bottom: 3rem;
+        }
+
+        .hero-desc span {
+            color: #fff;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 4rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.6;
+            animation: jump 1.5s ease-in-out infinite;
+            transition: opacity 0.5s ease;
+        }
+
+        .scroll-indicator.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes jump {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* About */
+        #about {
+            padding: 6rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            #about {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 767px) {
+            #about {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-img-container {
+            width: 100%;
+            height: 500px;
+            background-color: #222;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .about-img {
+            width: 100%;
+            height: 100%;
+            background-image: url("assets/profile.png");
+            /* Portrait */
+            background-size: cover;
+            background-position: center;
+            mix-blend-mode: luminosity;
+            filter: brightness(1.1);
+        }
+
+        /* Image Noise Overlay Removed */
+
+        .about-content h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        .experience-item {
+            margin-top: 2rem;
+            border-top: 1px solid #333;
+            padding-top: 1.5rem;
+        }
+
+        /* Projects */
+        #projects {
+            padding: 6rem 4rem;
+        }
+
+        .projects-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            position: relative;
+        }
+
+        .project-img-container {
+            width: 100%;
+            padding-bottom: 120%;
+            /* Taller Aspect Ratio */
+            position: relative;
+            background-color: #222;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .project-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+            filter: grayscale(100%);
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+
+        .project-card h3 {
+            position: relative;
+            display: inline-block;
+        }
+
+        .project-card h3::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .project-card:hover h3::after {
+            width: 100%;
+        }
+
+        /* Footer Social Icons */
+        .footer-socials {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 2;
+            /* Ensure icons are clickable over big text */
+        }
+
+        .footer-big-text {
+            font-size: 15vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            /* Very faint */
+            text-transform: uppercase;
+            position: absolute;
+            bottom: -5vw;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1;
+            letter-spacing: -5px;
+        }
+
+        .social-icon {
+            color: #aaa;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .social-icon.instagram:hover {
+            color: #E1306C;
+        }
+
+        .social-icon.linkedin:hover {
+            color: #0077B5;
+        }
+
+        .social-icon.mail:hover {
+            color: #fff;
+        }
+
+        footer {
+            padding: 4rem 4rem 10rem 4rem;
+            /* Extra space for big text */
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-big-text {
+            font-size: 18vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.05);
+            text-transform: uppercase;
+            position: absolute;
+            bottom: -5%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1;
+            letter-spacing: -0.05em;
+            /* Gradient Mask for Blur Effect at Bottom */
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        .cursor-blink {
+            display: inline-block;
+            margin-left: 5px;
+            font-weight: 100;
+            opacity: 1;
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Global Splash Cursor Canvas -->
+    <canvas id="fluid"
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none;"></canvas>
+
+    <!-- Small Dot Cursor -->
+    <div id="cursor-dot"></div>
+
+    <nav class="fade-in-up no-splash" id="navbar">
+        <a href="#home" class="nav-logo hover-target">ARYAN SHARMA</a>
+        <div class="nav-actions">
+            <a href="#about" class="nav-item hover-target">About</a>
+            <a href="#projects" class="nav-item hover-target">Projects</a>
+            <a href="#" class="nav-item hover-target">View Resume</a>
+            <a href="mailto:contact@aryansharma.com" class="btn-touch hover-target"><span>Get in Touch</span></a>
+        </div>
+    </nav>
+
+    <section id="home">
+
+
+        <h1 class="fade-in-up delay-2" style="min-height: 160px;">
+            <span id="typewriter-text"></span><span class="cursor-blink">|</span>
+        </h1>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const textElement = document.getElementById('typewriter-text');
+                const textToType = ["Hi, I am", "Aryan Sharma"];
+                let currentLine = 0;
+                let charIndex = 0;
+                const typingSpeed = 75; // ms per char
+
+                function type() {
+                    if (currentLine < textToType.length) {
+                        const lineContent = textToType[currentLine];
+
+                        if (charIndex < lineContent.length) {
+                            // Add character
+                            if (charIndex === 0 && currentLine > 0) {
+                                textElement.innerHTML += "<br>";
+                            }
+
+                            // Check if we are on the second line (Aryan Sharma) to wrap in span for styling
+                            let charToAdd = lineContent.charAt(charIndex);
+                            if (currentLine === 1) {
+                                // For the name, we want special styling (span)
+                                // But since we are typing char by char, we need to append to the span if it exists, or create it
+                                let nameSpan = textElement.querySelector('span');
+                                if (!nameSpan) {
+                                    nameSpan = document.createElement('span');
+                                    nameSpan.classList.add('highlight');
+                                    textElement.appendChild(nameSpan);
+                                }
+                                nameSpan.textContent += charToAdd;
+                            } else {
+                                textElement.innerHTML += charToAdd;
+                            }
+
+                            charIndex++;
+                            setTimeout(type, typingSpeed);
+                        } else {
+                            // Line finished
+                            currentLine++;
+                            charIndex = 0;
+                            setTimeout(type, 500); // Pause before next line
+                        }
+                    } else {
+                        // All typing done, hide cursor
+                        const cursor = document.querySelector('.cursor-blink');
+                        if (cursor) cursor.style.display = 'none';
+                    }
+                }
+
+                // Start typing after a small delay to sync with fade-in
+                setTimeout(type, 800);
+            });
+        </script>
+        <div class="hero-desc fade-in-up delay-3">
+            <p>From vision to venture, I transform bold ideas into scalable realities through strong design leadership
+                and precise execution, building the future with ambition, clarity, and no limits.</p>
+        </div>
+        <div class="scroll-indicator fade-in-up delay-4">Scroll to explore</div>
+    </section>
+
+    <section id="about">
+        <div class="about-img-container fade-in-up delay-1">
+            <div class="about-img"></div>
+
+        </div>
+        <div class="about-content fade-in-up delay-2">
+            <span
+                style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; color: #888; display: block; margin-bottom: 1rem;">About
+                Me</span>
+            <h2>UX Designer</h2>
+            <p style="color: #aaa; line-height: 1.8; margin-bottom: 3rem;">
+                Hi! I'm Aryan Sharma, a passionate UX designer driven by curiosity, leadership, and a builder’s mindset.
+                I take ownership, think beyond the brief, and bring bold ideas to life through thoughtful design and
+                strategic execution. I don’t just design interfaces, I build experiences that solve real problems.
+                Designing, leading, building one idea at a time.
+            </p>
+
+            <div class="experience-item">
+                <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">Experience</h3>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem;">UX Designer</h4>
+                        <p style="color: #888; font-size: 0.9rem; margin: 0;">Onething Design, Gurugram, Haryana</p>
+                    </div>
+                    <div id="experience-duration" style="font-size: 0.9rem; color: #666; text-align: right;">
+                        May 2025 - Present
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="projects-header fade-in-up">
+            <h2 style="font-size: 3rem;">My Work</h2>
+            <a href="#" class="nav-item hover-target" style="font-size: 1rem;">View All Projects</a>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card fade-in-up delay-1 hover-target no-splash">
+                <div class="project-img-container">
+                    <div class="project-img"
+                        style="background-image: url('assets/traqcheck-thumb.png'); filter: grayscale(0%);">
+                    </div>
+                </div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">TraqCheck</h3>
+                <p style="color: #888; font-size: 1rem;">Designing the web and mobile experience for an AI-powered
+                    hiring platform</p>
+            </div>
+
+            <!-- Project 2 -->
+            <a href="https://www.figma.com/proto/MsxNDwAwG8IyHRv0jF8l9J/Infimobile-case-study?page-id=0%3A1&node-id=1-13549&viewport=283%2C65%2C0.05&t=mMvNOz2dA4iiLOux-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=1%3A13549"
+                target="_blank" class="project-card fade-in-up delay-2 hover-target no-splash"
+                style="text-decoration: none; color: inherit; display: block;">
+                <div class="project-img-container">
+                    <div class="project-img"
+                        style="background-image: url('assets/infimobile-thumb.png'); filter: grayscale(0%);">
+                    </div>
+                </div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Infimobile</h3>
+                <p style="color: #888; font-size: 1rem;">Redesigning the web and mobile web platforms for a seamless
+                    telecom journey</p>
+            </a>
+
+            <!-- Project 3 -->
+            <div class="project-card fade-in-up delay-3 hover-target no-splash">
+                <div class="project-img-container">
+
+                </div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Travel Dashboard</h3>
+                <p style="color: #888; font-size: 1rem;">Web Application</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="fade-in-up">
+            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem; text-align: left;">Aryan Sharma</h3>
+            <p style="color: #666; font-size: 0.9rem; text-align: left;">&copy; 2026</p>
+        </div>
+        <div class="footer-socials fade-in-up delay-1 no-splash">
+            <a href="https://www.instagram.com/aryanx_sharma?igsh=MXhsbmsyemZxczcyeQ==" target="_blank"
+                rel="noopener noreferrer" class="social-icon hover-target instagram"><i
+                    class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/aryansharma100/" target="_blank" rel="noopener noreferrer"
+                class="social-icon hover-target linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="mailto:aryansharmaas100@gmail.com" class="social-icon hover-target mail"><i
+                    class="fa-solid fa-envelope"></i></a>
+        </div>
+        <div class="footer-big-text fade-in-up delay-2">ARYAN</div>
+    </footer>
+
+    <script>
+        // Force scroll to top on page refresh
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('beforeunload', () => {
+            window.scrollTo(0, 0);
+        });
+
+        // Dot Cursor Logic
+        const cursorDot = document.getElementById('cursor-dot');
+
+        document.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
+
+        // Navbar Liquid Glass Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Hide scroll indicator on scroll permanently
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (scrollIndicator && window.scrollY > 50) {
+                scrollIndicator.classList.add('hide');
+            }
+        });
+
+        // Dynamic Experience Duration
+        const startDate = new Date(2025, 4); // May is index 4
+        const currentDate = new Date();
+        let totalMonths = (currentDate.getFullYear() - startDate.getFullYear()) * 12 + (currentDate.getMonth() - startDate.getMonth()) + 1;
+        if (totalMonths < 1) totalMonths = 1;
+
+        let durationText = '';
+        if (totalMonths >= 12) {
+            const years = Math.floor(totalMonths / 12);
+            const remainingMonths = totalMonths % 12;
+            durationText = years + ' yr' + (years > 1 ? 's' : '') + (remainingMonths > 0 ? ' ' + remainingMonths + ' mos' : '');
+        } else {
+            durationText = totalMonths + ' mos';
+        }
+
+        const durationElement = document.getElementById('experience-duration');
+        if (durationElement) {
+            durationElement.textContent = 'May 2025 - Present · ' + durationText;
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Simple smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+    <script src="SplashCursor.js"></script>
+</body>
+
+</html>
