@@ -71,6 +71,7 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 0.8s ease-out forwards;
+            animation-play-state: paused;
         }
 
         .delay-1 {
@@ -970,13 +971,19 @@
             threshold: 0.1
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries, observerInstance) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.animationPlayState = 'running';
+                    observerInstance.unobserve(entry.target);
                 }
             });
         }, observerOptions);
+
+        // Attach observer to all elements with fade-in-up class
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
 
         // Simple smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
