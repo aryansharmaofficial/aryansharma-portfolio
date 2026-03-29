@@ -54,7 +54,8 @@
         #cursor-dot {
             width: 8px;
             height: 8px;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: white;
+            mix-blend-mode: difference;
             border-radius: 50%;
             position: fixed;
             top: 0;
@@ -62,7 +63,6 @@
             pointer-events: none;
             z-index: 9999;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
             transition: transform 0.1s ease;
         }
 
