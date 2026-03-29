@@ -384,24 +384,18 @@
             filter: grayscale(0%);
         }
 
-        .project-card h3 {
-            position: relative;
-            display: inline-block;
+        .hover-underline {
+            display: inline;
+            background-image: linear-gradient(to right, #fff, #fff);
+            background-repeat: no-repeat;
+            background-position: left bottom;
+            background-size: 0% 1px;
+            transition: background-size 0.3s ease;
+            padding-bottom: 2px;
         }
 
-        .project-card h3::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -2px;
-            left: 0;
-            background-color: #fff;
-            transition: width 0.3s ease;
-        }
-
-        .project-card:hover h3::after {
-            width: 100%;
+        .project-card:hover .hover-underline {
+            background-size: 100% 1px;
         }
 
         /* Footer Social Icons */
@@ -861,7 +855,7 @@
                         style="background-image: url('assets/traqcheck-thumb.png'); filter: grayscale(0%);">
                     </div>
                 </div>
-                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">TraqCheck</h3>
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;"><span class="hover-underline">TraqCheck</span></h3>
                 <p style="color: #888; font-size: 1rem;">Designing the web and mobile experience for an AI-powered
                     hiring platform</p>
             </div>
@@ -875,7 +869,7 @@
                         style="background-image: url('assets/infimobile-thumb.png'); filter: grayscale(0%);">
                     </div>
                 </div>
-                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Infimobile</h3>
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;"><span class="hover-underline">Infimobile</span></h3>
                 <p style="color: #888; font-size: 1rem;">Redesigning the web and mobile web platforms for a seamless
                     telecom journey</p>
             </a>
@@ -889,7 +883,7 @@
                         style="background-image: url('assets/solarity-thumb.jpg'); filter: grayscale(0%);">
                     </div>
                 </div>
-                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Solarity - AI Powered Solar Tracker App</h3>
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;"><span class="hover-underline">Solarity - AI Powered Solar Tracker App</span></h3>
                 <p style="color: #888; font-size: 1rem;">Designing the mobile experience for an AI powered Solar tracker App</p>
             </a>
         </div>
