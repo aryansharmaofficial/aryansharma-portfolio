@@ -16,9 +16,10 @@ const projects = [
     },
     {
         id: 3,
-        title: "Travel Dashboard",
-        category: "Web Application",
-        image: "https://via.placeholder.com/600x400/555555/ffffff?text=Project+3",
+        title: "Solarity - AI Powered Solar Tracker App",
+        category: "Designing the mobile experience for an AI powered Solar tracker App",
+        image: "/solarity.png",
+        link: "https://www.figma.com/proto/R56ycueTFe2hUpNRBQvVkQ/Solarity---AI-Powered-Solar-Tracker-App?node-id=419-1288&viewport=-22659%2C3927%2C2.98&t=LdV9DbgRYhNneK6p-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=531%3A5823&page-id=23%3A310"
     },
 ];
 
@@ -29,6 +30,7 @@ const ProjectCard = ({ project, index }) => (
         transition={{ duration: 0.6, delay: index * 0.2 }}
         viewport={{ once: true }}
         style={{ position: 'relative', cursor: 'pointer' }}
+        onClick={() => project.link && window.open(project.link, '_blank')}
     >
         <div style={{
             width: '100%',
