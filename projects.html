@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aryan Sharma | UX Designer</title>
+    <title>All Projects | Aryan Sharma</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -350,6 +350,18 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
+        }
+
+        .projects-grid-two {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid-two {
+                grid-template-columns: 1fr;
+            }
         }
 
         .project-card {
@@ -716,11 +728,11 @@
     <div id="cursor-dot"></div>
 
     <nav class="fade-in-up no-splash" id="navbar">
-        <a href="#home" class="nav-logo hover-target">ARYAN SHARMA</a>
+        <a href="index.html#home" class="nav-logo hover-target">ARYAN SHARMA</a>
         <div class="nav-actions">
             <!-- Desktop Links -->
-            <a href="#about" class="nav-item hover-target desktop-only">About</a>
-            <a href="#projects" class="nav-item hover-target desktop-only">Projects</a>
+            <a href="index.html#about" class="nav-item hover-target desktop-only">About</a>
+            <a href="index.html#projects" class="nav-item hover-target desktop-only">Projects</a>
             <a href="RESUME.pdf" target="_blank" class="nav-item hover-target desktop-only">View Resume</a>
             <a href="mailto:contact@aryansharma.com" class="btn-touch hover-target"><span>Get in Touch</span></a>
             
@@ -737,119 +749,24 @@
             <i class="fa-solid fa-xmark"></i>
         </button>
         <div class="mobile-menu-links">
-            <a href="#about" class="mobile-nav-item hover-target">About</a>
-            <a href="#projects" class="mobile-nav-item hover-target">Projects</a>
+            <a href="index.html#about" class="mobile-nav-item hover-target">About</a>
+            <a href="index.html#projects" class="mobile-nav-item hover-target">Projects</a>
             <a href="RESUME.pdf" target="_blank" class="mobile-nav-item hover-target">View Resume</a>
             <a href="mailto:contact@aryansharma.com" class="mobile-btn-touch hover-target">Get in Touch</a>
         </div>
     </div>
 
-    <section id="home">
-
-
-        <h1 class="fade-in-up delay-2" style="min-height: 160px;">
-            <span id="typewriter-text"></span><span class="cursor-blink">|</span>
-        </h1>
-
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const textElement = document.getElementById('typewriter-text');
-                const textToType = ["Hi, I am", "Aryan Sharma"];
-                let currentLine = 0;
-                let charIndex = 0;
-                const typingSpeed = 75; // ms per char
-
-                function type() {
-                    if (currentLine < textToType.length) {
-                        const lineContent = textToType[currentLine];
-
-                        if (charIndex < lineContent.length) {
-                            // Add character
-                            if (charIndex === 0 && currentLine > 0) {
-                                textElement.innerHTML += "<br>";
-                            }
-
-                            // Check if we are on the second line (Aryan Sharma) to wrap in span for styling
-                            let charToAdd = lineContent.charAt(charIndex);
-                            if (currentLine === 1) {
-                                // For the name, we want special styling (span)
-                                // But since we are typing char by char, we need to append to the span if it exists, or create it
-                                let nameSpan = textElement.querySelector('span');
-                                if (!nameSpan) {
-                                    nameSpan = document.createElement('span');
-                                    nameSpan.classList.add('highlight');
-                                    textElement.appendChild(nameSpan);
-                                }
-                                nameSpan.textContent += charToAdd;
-                            } else {
-                                textElement.innerHTML += charToAdd;
-                            }
-
-                            charIndex++;
-                            setTimeout(type, typingSpeed);
-                        } else {
-                            // Line finished
-                            currentLine++;
-                            charIndex = 0;
-                            setTimeout(type, 500); // Pause before next line
-                        }
-                    } else {
-                        // All typing done, hide cursor
-                        const cursor = document.querySelector('.cursor-blink');
-                        if (cursor) cursor.style.display = 'none';
-                    }
-                }
-
-                // Start typing after a small delay to sync with fade-in
-                setTimeout(type, 800);
-            });
-        </script>
-        <div class="hero-desc fade-in-up delay-3">
-            <p>From vision to venture, I transform bold ideas into scalable realities through strong design leadership
-                and precise execution, building the future with ambition, clarity, and no limits.</p>
-        </div>
-        <div class="scroll-indicator fade-in-up delay-4">Scroll to explore</div>
-    </section>
-
-    <section id="about">
-        <div class="about-img-container fade-in-up delay-1">
-            <div class="about-img"></div>
-
-        </div>
-        <div class="about-content fade-in-up delay-2">
-            <span
-                style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; color: #888; display: block; margin-bottom: 1rem;">About
-                Me</span>
-            <h2>UX Designer</h2>
-            <p style="color: #aaa; line-height: 1.8; margin-bottom: 3rem;">
-                Hi! I'm Aryan Sharma, a passionate UX designer driven by curiosity, leadership, and a builder’s mindset.
-                I take ownership, think beyond the brief, and bring bold ideas to life through thoughtful design and
-                strategic execution. I don’t just design interfaces, I build experiences that solve real problems.
-                Designing, leading, building one idea at a time.
-            </p>
-
-            <div class="experience-item">
-                <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem;">Experience</h3>
-                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                    <div>
-                        <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem;">UX Designer</h4>
-                        <p style="color: #888; font-size: 0.9rem; margin: 0;">Onething Design, Gurugram, Haryana</p>
-                    </div>
-                    <div id="experience-duration" style="font-size: 0.9rem; color: #666; text-align: right;">
-                        May 2025 - Present
-                    </div>
-                </div>
+    <section id="projects" style="padding-top: 10rem;">
+        <div class="projects-header fade-in-up">
+            <div>
+                <a href="index.html" class="nav-item hover-target desktop-only" style="font-size: 1rem; color: #888; display: inline-block;">Home</a>
+                <span style="color: #444; margin: 0 0.5rem;">&gt;</span>
+                <span class="desktop-only" style="font-size: 1rem; color: #fff; display: inline-block;">All Projects</span>
+                <h2 style="font-size: 3rem; margin-top: 2rem;">My Work</h2>
             </div>
         </div>
-    </section>
 
-    <section id="projects">
-        <div class="projects-header fade-in-up">
-            <h2 style="font-size: 3rem;">My Work</h2>
-            <a href="projects.html" class="nav-item hover-target desktop-only" style="font-size: 1rem;">View All Projects</a>
-        </div>
-
-        <div class="projects-grid">
+        <div class="projects-grid-two">
             <!-- Project 1 -->
             <a href="https://www.figma.com/proto/2f7Kdy3HCLDdq4fEnFeceZ/TraqCheck-Case-study?node-id=7-3609&viewport=54%2C150%2C0.02&t=SvAe7uce71Aq752U-1&scaling=min-zoom&content-scaling=fixed&page-id=2%3A88992"
                 target="_blank" class="project-card fade-in-up delay-1 hover-target no-splash"
@@ -892,10 +809,7 @@
             </a>
         </div>
         
-        <!-- Mobile View All Projects CTA -->
-        <div class="mobile-only" style="margin-top: 3rem; text-align: center;">
-            <a href="projects.html" class="btn-touch mobile-projects-cta hover-target"><span>View All Projects</span></a>
-        </div>
+
     </section>
 
     <footer>
