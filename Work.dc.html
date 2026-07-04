@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#FAFAF7}
+  ::selection{background:#2B4DF4;color:#fff}
+  @media (hover:hover) and (pointer:fine){ body, a, button{cursor:none} }
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+  .navDesk{display:flex}
+  .navBurger{display:none}
+  .workRow{grid-template-columns:72px 1fr 170px 70px}
+  @media (max-width:760px){
+    .navDesk{display:none}
+    .navBurger{display:flex}
+    .workRow{grid-template-columns:auto 1fr auto;gap:14px}
+    .wCat{display:none}
+  }
+  .cta{position:relative;display:inline-flex;align-items:center;text-decoration:none}
+  .cta .lbl{position:relative;display:inline-block;overflow:hidden;line-height:1.25}
+  .cta .lbl > span{display:block;transition:transform .45s cubic-bezier(.65,0,.2,1)}
+  .cta .lbl > span + span{position:absolute;top:0;left:0;width:100%;transform:translateY(112%)}
+  .cta:hover .lbl > span:first-child{transform:translateY(-112%)}
+  .cta:hover .lbl > span + span{transform:translateY(0)}
+  .cta .arr{display:inline-flex;align-items:center;justify-content:center;width:.9em;margin-left:.4em;opacity:0;transform:translateX(-7px);transition:opacity .35s ease,transform .42s cubic-bezier(.65,0,.2,1)}
+  .cta:hover .arr{opacity:1;transform:translateX(0)}
+  .nlink{position:relative}
+  .nlink::after{content:'';position:absolute;left:0;bottom:-4px;height:2px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform .35s cubic-bezier(.65,0,.2,1)}
+  .nlink:hover::after{transform:scaleX(1)}
+  .social{color:rgba(250,250,247,.85);display:inline-flex;align-items:center;justify-content:center;transition:color .35s ease,transform .35s cubic-bezier(.65,0,.2,1)}
+  .social svg{width:21px;height:21px;display:block;fill:currentColor}
+  .social:hover{transform:translateY(-2px)}
+  .s-li:hover{color:#0A66C2}
+  .s-ig:hover{color:#E4405F}
+  .s-x:hover{color:#E5B438}
+  .cta-grow .arr{width:0;margin-left:0;overflow:hidden;transform:translateX(-7px);transition:width .42s cubic-bezier(.65,0,.2,1),margin-left .42s cubic-bezier(.65,0,.2,1),opacity .35s ease,transform .42s cubic-bezier(.65,0,.2,1)}
+  .cta-grow:hover .arr{width:.85em;margin-left:.4em;transform:translateX(0)}
+  header{transition:background .45s ease,border-color .45s ease}
+  header a, header [data-cta], header .navBurger span{transition:color .4s ease,background .4s ease,border-color .4s ease}
+  header[data-dark]{background:rgba(18,18,20,.5) !important;border-bottom-color:rgba(255,255,255,.1) !important}
+  header[data-dark] a{color:#FAFAF7 !important}
+  header[data-dark] [data-cta]{background:#FAFAF7 !important;color:#0E0E10 !important}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="--ac:{{ ac }};position:relative;background:#FAFAF7;color:#0E0E10;font-family:'Archivo',sans-serif;overflow-x:clip;min-height:100vh">
+
+  <!-- HEADER -->
+  <header style="position:sticky;top:0;z-index:60;background:rgba(250,250,247,.6);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(14,14,16,.06)">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px clamp(20px,5vw,80px)">
+      <a href="Portfolio.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#0E0E10">
+        <span style="font-weight:900;letter-spacing:-.04em;font-size:23px;line-height:1">AS<span style="color:var(--ac)">.</span></span>
+      </a>
+      <nav class="navDesk" style="align-items:center;gap:clamp(18px,2.4vw,40px)">
+        <a href="Portfolio.dc.html#about" class="nlink" style="text-decoration:none;color:#0E0E10;font-weight:500;font-size:15px">About</a>
+        <a href="Work.dc.html" style="text-decoration:none;color:#0E0E10;font-weight:700;font-size:15px;border-bottom:2px solid var(--ac);padding-bottom:2px">Work</a>
+        <a href="assets/Aryan-Sharma-Resume.pdf" target="_blank" rel="noopener" class="nlink" style="text-decoration:none;color:#0E0E10;font-weight:500;font-size:15px">Resume</a>
+        <a href="mailto:aryansharmaas100@gmail.com" data-cta="1" data-cursor="solid" class="cta" style="text-decoration:none;background:#0E0E10;color:#FAFAF7;font-weight:600;font-size:14px;padding:11px 22px;border-radius:100px"><span class="lbl"><span>Get in touch&nbsp;&nbsp;<span style="display:inline-block;font-weight:700">&rarr;</span></span><span>Get in touch&nbsp;&nbsp;<span style="display:inline-block;font-weight:700">&rarr;</span></span></span></a>
+      </nav>
+      <a class="navBurger" href="Portfolio.dc.html" aria-label="Home" style="align-items:center;text-decoration:none;color:#0E0E10;font-weight:700;font-size:14px">&larr; Home</a>
+    </div>
+  </header>
+
+  <!-- PAGE HEAD -->
+  <section style="padding:clamp(46px,7vw,110px) clamp(20px,5vw,80px) clamp(24px,3vw,40px)">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:clamp(18px,2.4vw,30px)">
+      <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(14,14,16,.55)">Index &middot; {{ count }} projects</span>
+      <span style="flex:1;height:1px;background:rgba(14,14,16,.14);max-width:240px"></span>
+    </div>
+    <h1 style="margin:0;font-weight:900;font-size:clamp(64px,16vw,260px);line-height:.82;letter-spacing:-.045em;text-transform:uppercase">Work</h1>
+    <p style="margin:clamp(18px,2.4vw,30px) 0 0;max-width:60ch;font-size:clamp(16px,1.3vw,21px);line-height:1.55;color:rgba(14,14,16,.62)">A few of the products, enterprise tools and systems I&rsquo;ve worked on between 2025 and 2026. Every project here is a full case study: the problem, how I got through it, and what changed.</p>
+
+    <!-- FILTERS -->
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(28px,3.4vw,46px)">
+      <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+        <button onClick="{{ f.onClick }}" data-magnetic="0.2" style="{{ f.style }}">{{ f.label }}</button>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- PROJECT LIST -->
+  <section style="padding:clamp(10px,1.5vw,24px) clamp(20px,5vw,80px) clamp(60px,8vw,120px)">
+    <div style="border-top:1px solid rgba(14,14,16,.16)">
+      <sc-for list="{{ projects }}" as="p" hint-placeholder-count="8">
+        <a href="{{ p.href }}" data-row data-bg="{{ p.bg }}" data-no="{{ p.no }}" data-img="{{ p.img }}" data-title="{{ p.title }}" class="workRow" style="display:grid;align-items:center;gap:24px;padding:clamp(20px,2.6vw,40px) clamp(8px,1vw,18px);border-bottom:1px solid rgba(14,14,16,.16);text-decoration:none;color:#0E0E10;transition:padding-left .35s cubic-bezier(.2,.8,.2,1),background .35s,color .35s" style-hover="padding-left:28px;background:rgba(43,77,244,.05);color:var(--ac)">
+          <span style="font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:inherit;opacity:.7">{{ p.no }}</span>
+          <span style="font-weight:800;font-size:clamp(26px,4.4vw,62px);letter-spacing:-.03em;line-height:1;color:inherit">{{ p.title }}</span>
+          <span class="wCat" style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(14,14,16,.5)">{{ p.cat }}</span>
+          <span style="font-family:'Space Mono',monospace;font-size:14px;color:rgba(14,14,16,.55);text-align:right">{{ p.year }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- FLOATING HOVER THUMB -->
+  <div data-thumb style="position:fixed;top:0;left:0;width:clamp(220px,22vw,320px);height:clamp(150px,15vw,220px);border-radius:16px;overflow:hidden;pointer-events:none;z-index:45;opacity:0;transform:translate(-50%,-50%) scale(.86);transition:opacity .35s cubic-bezier(.2,.8,.2,1),transform .35s cubic-bezier(.2,.8,.2,1);box-shadow:0 30px 60px -28px rgba(14,14,16,.5)">
+    <div data-thumb-bg style="position:absolute;inset:0;background:#EAEFFE"></div>
+    <div data-thumb-stripes style="position:absolute;inset:0;background-image:repeating-linear-gradient(135deg,rgba(14,14,16,.06) 0 2px,transparent 2px 13px)"></div>
+    <img data-thumb-img alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s ease">
+    <span data-thumb-no style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-weight:900;font-size:64px;letter-spacing:-.05em;color:rgba(14,14,16,.14)">01</span>
+    <span style="position:absolute;left:16px;bottom:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(14,14,16,.5);z-index:2">View case study &rarr;</span>
+  </div>
+
+  <!-- CONTACT / FOOTER -->
+  <footer data-nav-dark style="background:#0E0E10;color:#FAFAF7;padding:clamp(60px,9vw,120px) clamp(20px,5vw,80px) clamp(30px,4vw,48px);border-radius:36px 36px 0 0;margin-top:20px">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(24px,3vw,40px)">
+      <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,250,247,.5)">Get in touch</span>
+      <a href="mailto:aryansharmaas100@gmail.com" data-cursor="solid" data-magnetic="0.18" style="text-decoration:none;color:#FAFAF7;font-weight:900;font-size:clamp(40px,9vw,150px);line-height:.9;letter-spacing:-.04em;display:block">
+        Let&rsquo;s <span style="-webkit-text-stroke:2px #FAFAF7;color:transparent">work</span> together
+      </a>
+      <a href="mailto:aryansharmaas100@gmail.com" data-cursor="solid" class="cta" style="text-decoration:none;background:var(--ac);color:#fff;font-weight:600;font-size:clamp(15px,1.3vw,18px);padding:16px 32px;border-radius:100px">
+        <span class="lbl"><span>aryansharmaas100@gmail.com</span><span>aryansharmaas100@gmail.com</span></span>
+        <span class="arr">&rarr;</span>
+      </a>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;margin-top:clamp(50px,7vw,100px);padding-top:28px;border-top:1px solid rgba(250,250,247,.14);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,250,247,.55)">
+      <span>&copy; {{ year }} Aryan Sharma</span>
+      <div style="display:flex;gap:20px;align-items:center">
+        <a href="https://www.linkedin.com/in/aryansharma100/" target="_blank" rel="noopener" data-cursor="link" aria-label="LinkedIn" class="social s-li"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <a href="https://www.instagram.com/aryanx_sharma/" target="_blank" rel="noopener" data-cursor="link" aria-label="Instagram" class="social s-ig"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.12 1.38C1.35 2.67.93 3.34.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.12.66.66 1.33 1.08 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.12-1.38.66-.66 1.08-1.33 1.38-2.12.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.3-.79-.72-1.46-1.38-2.12-.66-.66-1.33-1.08-2.12-1.38-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zM12 16a4 4 0 110-8 4 4 0 010 8z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg></a>
+        <a href="https://x.com/aryansharma_100" target="_blank" rel="noopener" data-cursor="link" aria-label="X" class="social s-x"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.16 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></a>
+      </div>
+      <span>Made in Gurugram, IN</span>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#2B4DF4&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { filter: 'All' };
+
+  renderVals() {
+    const ac = this.props.accent || '#2B4DF4';
+    const all = [
+      { no: '01', title: 'TraqCheck', cat: 'HR Tech', year: '2026', type: 'Product', bg: '#EAEFFE', img: 'assets/traqcheck-thumb.webp', href: 'TraqCheck.dc.html' },
+      { no: '02', title: 'Infimobile', cat: 'Telecom', year: '2025', type: 'Enterprise', bg: '#1A0606', img: 'assets/infimobile-card.webp', href: 'Infimobile.dc.html' },
+      { no: '03', title: 'Solarity', cat: 'Clean Energy', year: '2025', type: 'Product', bg: '#E8F1EC', img: 'assets/solarity-card.webp', href: 'Solarity.dc.html' },
+      { no: '04', title: 'Zepto', cat: 'Quick Commerce', year: '2025', type: 'Product', bg: '#F3ECF4', img: 'assets/zepto-card.webp', href: 'ComingSoon.dc.html' },
+    ];
+    const cur = this.state.filter;
+    const projects = cur === 'All' ? all : all.filter((p) => p.type === cur);
+    const cats = ['All', 'Product', 'Enterprise'];
+    const filters = cats.map((label) => {
+      const active = label === cur;
+      return {
+        label,
+        onClick: () => this.setState({ filter: label }),
+        style: `font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.04em;text-transform:uppercase;padding:10px 18px;border-radius:100px;border:1px solid ${active ? '#0E0E10' : 'rgba(14,14,16,.18)'};background:${active ? '#0E0E10' : 'transparent'};color:${active ? '#FAFAF7' : 'rgba(14,14,16,.7)'};font-weight:700;transition:all .25s`,
+      };
+    });
+    return { ac, rootRef: (el) => { if (el) this.root = el; }, projects, filters, count: all.length, year: 2026 };
+  }
+
+  componentDidMount() {
+    this._cleanup = [];
+    const root = this.root || document;
+    const ac = this.props.accent || '#2B4DF4';
+    const fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+    // dark-region detection (shared by nav + cursor)
+    const darks = [...root.querySelectorAll('[data-nav-dark]')];
+    const isDarkAt = (x, y) => darks.some((d) => { const r = d.getBoundingClientRect(); return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom; });
+
+    // sticky nav inverts over dark sections (JS-driven inline styles)
+    const header = root.querySelector('header');
+    if (header) {
+      const links = [...header.querySelectorAll('a')];
+      header.style.transition = 'background .45s ease, border-color .45s ease';
+      links.forEach((a) => { a.dataset._oc = a.style.color || ''; a.dataset._ob = a.style.background || ''; a.style.transition = (a.style.transition ? a.style.transition + ',' : '') + 'color .4s ease, background .4s ease'; });
+      let darkNow = null;
+      const setDark = (on) => {
+        if (on === darkNow) return; darkNow = on;
+        header.style.background = on ? 'rgba(18,18,20,.5)' : 'rgba(250,250,247,.6)';
+        header.style.borderBottomColor = on ? 'rgba(255,255,255,.12)' : 'rgba(14,14,16,.06)';
+        links.forEach((a) => {
+          if (a.hasAttribute('data-cta')) {
+            a.style.background = on ? '#FAFAF7' : a.dataset._ob;
+            a.style.color = on ? '#0E0E10' : '#FAFAF7';
+          } else {
+            a.style.color = on ? '#FAFAF7' : a.dataset._oc;
+          }
+        });
+      };
+      const navScroll = () => {
+        const band = header.offsetHeight * 0.55;
+        setDark(darks.some((d) => { const r = d.getBoundingClientRect(); return r.top <= band && r.bottom >= 0; }));
+      };
+      addEventListener('scroll', navScroll, { passive: true }); navScroll();
+      this._cleanup.push(() => removeEventListener('scroll', navScroll));
+    }
+
+    // custom cursor (inverts color on dark backgrounds)
+    if (fine) {
+      const dot = document.createElement('div');
+      dot.style.cssText = 'position:fixed;top:0;left:0;width:8px;height:8px;border-radius:50%;background:#0E0E10;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:opacity .25s,background .25s';
+      const ring = document.createElement('div');
+      ring.style.cssText = 'position:fixed;top:0;left:0;width:34px;height:34px;border:1.5px solid rgba(14,14,16,.35);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .28s,height .28s,border-color .28s';
+      document.body.appendChild(dot); document.body.appendChild(ring);
+      let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+      const move = (e) => {
+        mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+        const dark = isDarkAt(mx, my);
+        const solid = e.target.closest('[data-cursor="solid"]');
+        const t = e.target.closest('a,button,[data-row]');
+        if (solid) { ring.style.width = '36px'; ring.style.height = '36px'; ring.style.borderColor = 'rgba(250,250,247,.55)'; dot.style.background = '#FAFAF7'; }
+        else { dot.style.background = dark ? '#FAFAF7' : '#0E0E10'; if (t) { ring.style.width = '54px'; ring.style.height = '54px'; ring.style.borderColor = ac; } else { ring.style.width = '34px'; ring.style.height = '34px'; ring.style.borderColor = dark ? 'rgba(250,250,247,.5)' : 'rgba(14,14,16,.35)'; } }
+      };
+      const raf = () => { rx += (mx - rx) * .18; ry += (my - ry) * .18; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; this._rafId = requestAnimationFrame(raf); };
+      addEventListener('mousemove', move); raf();
+      this._cleanup.push(() => { removeEventListener('mousemove', move); cancelAnimationFrame(this._rafId); dot.remove(); ring.remove(); });
+    }
+
+    // magnetic
+    root.querySelectorAll('[data-magnetic]').forEach((el) => {
+      const s = parseFloat(el.getAttribute('data-magnetic')) || .3;
+      const mm = (e) => { const r = el.getBoundingClientRect(); el.style.transform = `translate(${(e.clientX - (r.left + r.width / 2)) * s}px,${(e.clientY - (r.top + r.height / 2)) * s}px)`; };
+      const lv = () => { el.style.transform = 'translate(0,0)'; };
+      el.style.transition = 'transform .35s cubic-bezier(.2,.8,.2,1)';
+      el.addEventListener('mousemove', mm); el.addEventListener('mouseleave', lv);
+      this._cleanup.push(() => { el.removeEventListener('mousemove', mm); el.removeEventListener('mouseleave', lv); });
+    });
+
+    // hover-follow thumbnail (desktop)
+    if (fine) {
+      const thumb = root.querySelector('[data-thumb]');
+      const bg = root.querySelector('[data-thumb-bg]');
+      const noEl = root.querySelector('[data-thumb-no]');
+      let tx = innerWidth / 2, ty = innerHeight / 2, cx = tx, cy = ty, active = false;
+      const move = (e) => { tx = e.clientX; ty = e.clientY; };
+      const raf = () => { cx += (tx - cx) * .16; cy += (ty - cy) * .16; if (thumb) thumb.style.left = cx + 'px', thumb.style.top = cy + 'px'; this._thumbRaf = requestAnimationFrame(raf); };
+      addEventListener('mousemove', move); raf();
+      const bind = () => {
+        root.querySelectorAll('[data-row]').forEach((rowEl) => {
+          const en = () => {
+            if (bg) bg.style.background = rowEl.getAttribute('data-bg');
+            if (noEl) noEl.textContent = rowEl.getAttribute('data-no');
+            const src = rowEl.getAttribute('data-img');
+            const imgEl = root.querySelector('[data-thumb-img]');
+            const stripes = root.querySelector('[data-thumb-stripes]');
+            if (imgEl) {
+              if (src) { imgEl.src = src; imgEl.style.opacity = '1'; if (noEl) noEl.style.opacity = '0'; if (stripes) stripes.style.opacity = '0'; }
+              else { imgEl.style.opacity = '0'; imgEl.removeAttribute('src'); if (noEl) noEl.style.opacity = '1'; if (stripes) stripes.style.opacity = '1'; }
+            }
+            if (thumb) { thumb.style.opacity = '1'; thumb.style.transform = 'translate(-50%,-50%) scale(1)'; } active = true;
+          };
+          const lv = () => { if (thumb) { thumb.style.opacity = '0'; thumb.style.transform = 'translate(-50%,-50%) scale(.86)'; } active = false; };
+          rowEl.addEventListener('mouseenter', en); rowEl.addEventListener('mouseleave', lv);
+          this._cleanup.push(() => { rowEl.removeEventListener('mouseenter', en); rowEl.removeEventListener('mouseleave', lv); });
+        });
+      };
+      this._rebind = bind; bind();
+      this._cleanup.push(() => { removeEventListener('mousemove', move); cancelAnimationFrame(this._thumbRaf); });
+    }
+  }
+
+  componentDidUpdate() { if (this._rebind) this._rebind(); }
+  componentWillUnmount() { (this._cleanup || []).forEach((f) => f()); }
+}
+</script>
+</body>
+</html>

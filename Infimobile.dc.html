@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Newsreader:ital,wght@1,400;1,500;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#FAFAF7}
+  ::selection{background:#DB0004;color:#fff}
+  img{display:block;max-width:100%}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:none}}
+  .navDesk{display:flex}
+  .navBurger{display:none}
+  .twoCol{grid-template-columns:.85fr 1.15fr}
+  .metaGrid{grid-template-columns:repeat(4,1fr)}
+  .findGrid{grid-template-columns:repeat(3,1fr)}
+  .procGrid{grid-template-columns:.9fr 1.1fr}
+  @media (max-width:860px){
+    .navDesk{display:none}
+    .navBurger{display:flex}
+    .twoCol{grid-template-columns:1fr;gap:24px}
+    .metaGrid{grid-template-columns:repeat(2,1fr)}
+    .findGrid{grid-template-columns:1fr}
+    .procGrid{grid-template-columns:1fr;gap:24px}
+  }
+  .serif{font-family:'Newsreader',serif;font-style:italic;font-weight:500;color:var(--ac)}
+  .cta{position:relative;display:inline-flex;align-items:center;text-decoration:none}
+  .cta .lbl{position:relative;display:inline-block;overflow:hidden;line-height:1.25}
+  .cta .lbl > span{display:block;transition:transform .45s cubic-bezier(.65,0,.2,1)}
+  .cta .lbl > span + span{position:absolute;top:0;left:0;width:100%;transform:translateY(112%)}
+  .cta:hover .lbl > span:first-child{transform:translateY(-112%)}
+  .cta:hover .lbl > span + span{transform:translateY(0)}
+  .cta .arr{display:inline-flex;align-items:center;justify-content:center;width:.9em;margin-left:.4em;opacity:0;transform:translateX(-7px);transition:opacity .35s ease,transform .42s cubic-bezier(.65,0,.2,1)}
+  .cta:hover .arr{opacity:1;transform:translateX(0)}
+  .viewAllFooter:hover{background:#fff;color:#0E0E10;border-color:#fff}
+  .social{color:rgba(250,250,247,.85);display:inline-flex;align-items:center;justify-content:center;transition:color .35s ease,transform .35s cubic-bezier(.65,0,.2,1)}
+  .social svg{width:21px;height:21px;display:block;fill:currentColor}
+  .social:hover{transform:translateY(-2px)}
+  .s-li:hover{color:#0A66C2}.s-ig:hover{color:#E4405F}.s-x:hover{color:#fff}
+  .nlink{position:relative}
+  .nlink::after{content:'';position:absolute;left:0;bottom:-4px;height:2px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform .35s cubic-bezier(.65,0,.2,1)}
+  .nlink:hover::after{transform:scaleX(1)}
+  .procItem{transition:padding-left .35s cubic-bezier(.65,0,.2,1)}
+  .procItem:hover{padding-left:14px}
+  .procItem:hover .procName{color:var(--ac)}
+  .figcap{font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(14,14,16,.42)}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="--ac:{{ ac }};position:relative;background:#FAFAF7;color:#0E0E10;font-family:'Archivo',sans-serif;overflow-x:clip;min-height:100vh">
+
+  <!-- READING PROGRESS -->
+  <div data-progress style="position:fixed;top:0;left:0;height:3px;width:0%;background:var(--ac);z-index:70;transition:width .1s linear"></div>
+
+  <!-- HEADER -->
+  <header style="position:sticky;top:0;z-index:60;background:rgba(250,250,247,.6);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(14,14,16,.06)">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px clamp(20px,5vw,80px)">
+      <a href="Portfolio.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#0E0E10">
+        <span style="font-weight:900;letter-spacing:-.04em;font-size:23px;line-height:1">AS<span style="color:#2B4DF4">.</span></span>
+      </a>
+      <nav class="navDesk" style="align-items:center;gap:clamp(18px,2.4vw,40px)">
+        <a href="About.dc.html" class="nlink" style="text-decoration:none;color:#0E0E10;font-weight:500;font-size:15px">About</a>
+        <a href="Work.dc.html" class="nlink" style="text-decoration:none;color:#0E0E10;font-weight:500;font-size:15px">Work</a>
+        <a href="assets/Aryan-Sharma-Resume.pdf" target="_blank" rel="noopener" class="nlink" style="text-decoration:none;color:#0E0E10;font-weight:500;font-size:15px">Resume</a>
+        <a href="mailto:aryansharmaas100@gmail.com" data-cta="1" class="cta" style="text-decoration:none;background:#0E0E10;color:#FAFAF7;font-weight:600;font-size:14px;padding:11px 22px;border-radius:100px">
+          <span class="lbl">
+            <span>Get in touch&nbsp;&nbsp;<span style="display:inline-block;font-weight:700">&rarr;</span></span>
+            <span>Get in touch&nbsp;&nbsp;<span style="display:inline-block;font-weight:700">&rarr;</span></span>
+          </span>
+        </a>
+      </nav>
+      <button class="navBurger" onClick="{{ toggleMenu }}" aria-label="Menu" style="flex-direction:column;gap:5px;background:none;border:none;padding:8px">
+        <span style="width:26px;height:2px;background:#0E0E10;display:block"></span>
+        <span style="width:26px;height:2px;background:#0E0E10;display:block"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div style="{{ menuStyle }}">
+    <div style="display:flex;flex-direction:column;gap:6px;padding:90px clamp(20px,7vw,40px) 40px">
+      <a href="About.dc.html" onClick="{{ closeMenu }}" style="text-decoration:none;color:#0E0E10;font-weight:800;font-size:44px;letter-spacing:-.03em;padding:10px 0;border-bottom:1px solid rgba(14,14,16,.1)">About</a>
+      <a href="Work.dc.html" style="text-decoration:none;color:#0E0E10;font-weight:800;font-size:44px;letter-spacing:-.03em;padding:10px 0;border-bottom:1px solid rgba(14,14,16,.1)">Work</a>
+      <a href="assets/Aryan-Sharma-Resume.pdf" target="_blank" rel="noopener" onClick="{{ closeMenu }}" style="text-decoration:none;color:#0E0E10;font-weight:800;font-size:44px;letter-spacing:-.03em;padding:10px 0;border-bottom:1px solid rgba(14,14,16,.1)">Resume</a>
+      <a href="mailto:aryansharmaas100@gmail.com" style="text-decoration:none;color:var(--ac);font-weight:800;font-size:44px;letter-spacing:-.03em;padding:10px 0">Get in touch &rarr;</a>
+    </div>
+  </div>
+  <button onClick="{{ closeMenu }}" aria-label="Close" style="{{ closeBtnStyle }}">&times;</button>
+
+  <!-- HERO -->
+  <section style="padding:clamp(40px,6vw,90px) clamp(20px,5vw,80px) clamp(28px,3.4vw,46px)">
+    <a href="Work.dc.html" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:rgba(14,14,16,.55);margin-bottom:clamp(20px,3vw,40px)">&larr; All work</a>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+      <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);font-weight:700">Telecom &middot; 2025</span>
+      <span style="flex:1;height:1px;background:rgba(14,14,16,.14);max-width:200px"></span>
+    </div>
+    <h1 style="margin:0;font-weight:900;font-size:clamp(40px,7vw,120px);line-height:.9;letter-spacing:-.04em;max-width:15ch">Infimobile &mdash; Smart, Affordable Wireless</h1>
+    <p style="margin:clamp(20px,2.6vw,34px) 0 0;max-width:62ch;font-size:clamp(17px,1.5vw,24px);line-height:1.5;color:rgba(14,14,16,.66)">Redesigning the web &amp; mobile experience for a nationwide telecom brand &mdash; clearer IA, simpler activation flows, and a bold, mascot-led identity that builds trust and converts.</p>
+
+    <div class="metaGrid" style="display:grid;gap:clamp(18px,2vw,30px);margin-top:clamp(34px,4.5vw,64px);border-top:1px solid rgba(14,14,16,.16);padding-top:clamp(22px,2.6vw,34px)">
+      <sc-for list="{{ meta }}" as="m" hint-placeholder-count="4">
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.45);margin-bottom:8px">{{ m.k }}</div>
+          <div style="font-weight:600;font-size:clamp(15px,1.2vw,18px)">{{ m.v }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- BANNER COVER -->
+  <section style="padding:0">
+    <div style="overflow:hidden">
+      <img src="assets/infimobile-banner.webp" alt="Infimobile — Unlimited Talktimes homepage" style="width:100%;height:auto">
+    </div>
+  </section>
+
+  <!-- PROJECT OVERVIEW -->
+  <section style="padding:clamp(60px,8vw,130px) clamp(20px,5vw,80px) clamp(20px,3vw,40px)">
+    <div class="twoCol" style="display:grid;gap:clamp(30px,5vw,90px);animation:fadeUp both;animation-timeline:view();animation-range:entry 0% cover 30%">
+      <div>
+        <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">01 &middot; Overview</span>
+        <h2 style="margin:14px 0 0;font-weight:500;font-size:clamp(28px,3.4vw,52px);line-height:1.04;letter-spacing:-.03em"><span class="serif">Project</span> OVERVIEW</h2>
+      </div>
+      <div>
+        <p style="margin:0;font-size:clamp(16px,1.3vw,22px);line-height:1.6;color:rgba(14,14,16,.72);max-width:56ch;font-weight:400">Infimobile is a web and mobile platform designed to provide a smooth and user-friendly digital experience. I worked on this project to improve usability by conducting research, analyzing competitors, creating the information architecture, and designing wireframes for both platforms. The focus was on simplifying navigation and enhancing key user journeys.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM STATEMENT -->
+  <section style="padding:clamp(50px,7vw,110px) clamp(20px,5vw,80px)">
+    <div class="twoCol" style="display:grid;gap:clamp(30px,5vw,90px);align-items:start;animation:fadeUp both;animation-timeline:view();animation-range:entry 0% cover 26%">
+      <div>
+        <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">02 &middot; Challenge</span>
+        <h2 style="margin:14px 0 0;font-weight:500;font-size:clamp(28px,3.4vw,52px);line-height:1.04;letter-spacing:-.03em"><span class="serif">Problem</span> STATEMENT</h2>
+      </div>
+      <p style="margin:0;font-size:clamp(17px,1.4vw,23px);line-height:1.55;color:rgba(14,14,16,.72);max-width:60ch">The existing Infimobile experience had usability challenges that made it difficult for users to navigate the platform smoothly and complete key tasks efficiently. The information structure was unclear, important features were not easily discoverable, and the overall flow lacked consistency across web and mobile. The goal of this project was to identify these pain points and redesign the experience with a clearer structure, improved navigation, and a more intuitive user journey.</p>
+    </div>
+  </section>
+
+  <!-- BRAND / DIRECTION IMAGE -->
+  <section style="padding:clamp(30px,4vw,60px) clamp(24px,6vw,72px)">
+    <div style="overflow:hidden">
+      <img src="assets/infimobile-brand.webp" alt="Bringing smart, affordable wireless service nationwide — One SIM. Infinite You." style="width:100%;height:auto">
+    </div>
+    <p class="figcap" style="margin:16px 0 0">Brand direction &middot; mascot-led identity &middot; &ldquo;One SIM. Infinite You.&rdquo;</p>
+  </section>
+
+  <!-- PROCESS -->
+  <section style="padding:clamp(60px,8vw,130px) clamp(20px,5vw,80px) clamp(40px,5vw,80px)">
+    <div class="procGrid" style="display:grid;gap:clamp(30px,5vw,80px);align-items:start">
+      <div style="position:sticky;top:100px">
+        <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">03 &middot; Process</span>
+        <h2 style="margin:14px 0 0;font-weight:500;font-size:clamp(28px,3.4vw,52px);line-height:1.04;letter-spacing:-.03em"><span class="serif">The</span> PROCESS</h2>
+      </div>
+      <div>
+        <sc-for list="{{ process }}" as="p" hint-placeholder-count="5">
+          <div class="procItem" style="display:flex;align-items:baseline;gap:clamp(20px,3vw,44px);padding:clamp(22px,2.6vw,34px) 0;border-bottom:1px solid rgba(14,14,16,.13)">
+            <span class="serif" style="font-size:clamp(18px,1.6vw,26px);min-width:2.4ch">{{ p.no }}</span>
+            <span class="procName" style="font-weight:600;font-size:clamp(20px,2.2vw,32px);letter-spacing:-.02em;transition:color .3s ease">{{ p.title }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH OBJECTIVE -->
+  <section style="padding:clamp(40px,6vw,90px) clamp(20px,5vw,80px)">
+    <div class="twoCol" style="display:grid;gap:clamp(30px,5vw,80px);margin-bottom:clamp(36px,4.5vw,64px);align-items:start;animation:fadeUp both;animation-timeline:view();animation-range:entry 0% cover 26%">
+      <div>
+        <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">04 &middot; Research</span>
+        <h2 style="margin:14px 0 0;font-weight:500;font-size:clamp(28px,3.4vw,52px);line-height:1.04;letter-spacing:-.03em"><span class="serif">Research</span> OBJECTIVE</h2>
+      </div>
+      <p style="margin:0;font-size:clamp(16px,1.3vw,20px);line-height:1.6;color:rgba(14,14,16,.72);max-width:60ch">We began the project by thoroughly studying the existing Infimobile platform to understand what the product offers, who it serves, and how users currently interact with it. This included reviewing the website and mobile experience, analyzing the navigation structure, key user flows, content hierarchy, and overall usability &mdash; helping us identify gaps in clarity, information grouping, and flow consistency across platforms.</p>
+    </div>
+    <div class="findGrid" style="display:grid;gap:clamp(16px,1.8vw,24px)">
+      <sc-for list="{{ findings }}" as="f" hint-placeholder-count="3">
+        <div style="background:#fff;border:1px solid rgba(14,14,16,.1);border-radius:20px;padding:clamp(26px,2.6vw,40px);display:flex;flex-direction:column;gap:16px;height:100%">
+          <span style="width:52px;height:52px;border:1.5px solid rgba(14,14,16,.35);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;flex:none">{{ f.no }}</span>
+          <h3 style="margin:2px 0 0;font-weight:600;font-size:clamp(20px,1.7vw,26px);letter-spacing:-.02em;line-height:1.1">{{ f.title }}</h3>
+          <p style="margin:0;font-size:clamp(14px,1.05vw,15px);line-height:1.55;color:rgba(14,14,16,.55)">{{ f.intro }}</p>
+          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ f.items }}" as="it" hint-placeholder-count="4">
+              <li style="display:flex;gap:12px;align-items:flex-start;font-size:clamp(14px,1.05vw,16px);line-height:1.4;color:rgba(14,14,16,.82)">
+                <span style="flex:none;width:6px;height:6px;border-radius:50%;background:var(--ac);margin-top:8px"></span>
+                <span>{{ it }}</span>
+              </li>
+            </sc-for>
+          </ul>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- INFORMATION ARCHITECTURE -->
+  <section style="padding:clamp(60px,8vw,130px) clamp(24px,6vw,72px) clamp(30px,4vw,60px)">
+    <div>
+      <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">05 &middot; Structure</span>
+      <h2 style="margin:14px 0 clamp(30px,4vw,52px);font-weight:500;font-size:clamp(28px,3.4vw,52px);line-height:1.04;letter-spacing:-.03em"><span class="serif">Information</span> ARCHITECTURE</h2>
+    </div>
+    <div style="overflow:hidden">
+      <img src="assets/infimobile-ia.webp" alt="Infimobile website information architecture flow" style="width:100%;height:auto">
+    </div>
+    <p class="figcap" style="margin:16px 0 0">Website IA &middot; plans, activation, support, account &amp; dashboard flows</p>
+  </section>
+
+  <!-- VISUAL DIRECTION: COLOR + TYPOGRAPHY -->
+  <section style="padding:clamp(40px,6vw,90px) 0">
+    <div style="padding:0 clamp(20px,5vw,80px)">
+      <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">06 &middot; Visual Direction</span>
+    </div>
+    <div style="overflow:hidden;margin-top:clamp(20px,2.6vw,34px)">
+      <img src="assets/infimobile-colors.webp" alt="Infimobile color palette — red, black, white and supporting accents" style="width:100%;height:auto">
+    </div>
+    <div style="overflow:hidden">
+      <img src="assets/infimobile-typography.webp" alt="Sequel Sans typography — weights, character set and scale" style="width:100%;height:auto;display:block">
+    </div>
+  </section>
+
+  <!-- HIGH FIDELITY UI -->
+  <section style="padding:clamp(40px,6vw,90px) 0">
+    <div style="padding:0 clamp(20px,5vw,80px)">
+      <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">07 &middot; High Fidelity</span>
+      <h2 style="margin:14px 0 clamp(28px,3.4vw,48px);font-weight:500;font-size:clamp(28px,3.4vw,52px);line-height:1.04;letter-spacing:-.03em"><span class="serif">High Fidelity</span> UI</h2>
+    </div>
+    <div style="overflow:hidden">
+      <img src="assets/infimobile-hifi-product.webp" alt="Infimobile high fidelity — dashboard, upgrades and feature screens" style="width:100%;height:auto">
+    </div>
+    <div style="overflow:hidden;margin-top:clamp(14px,1.6vw,24px)">
+      <img src="assets/infimobile-hifi-mobile.webp" alt="Infimobile high fidelity mobile app screens" style="width:100%;height:auto">
+    </div>
+  </section>
+
+  <!-- DESIGN HANDOFF -->
+  <section style="padding:clamp(60px,8vw,120px) clamp(20px,5vw,80px)">
+    <div class="twoCol" style="display:grid;gap:clamp(30px,5vw,80px);align-items:start">
+      <div>
+        <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">08 &middot; Handoff</span>
+        <h2 style="margin:14px 0 0;font-weight:500;font-size:clamp(28px,3.4vw,52px);line-height:1.04;letter-spacing:-.03em"><span class="serif">Design</span> HANDOFF</h2>
+      </div>
+      <div style="font-size:clamp(16px,1.3vw,21px);line-height:1.65;color:rgba(14,14,16,.72);max-width:58ch;display:flex;flex-direction:column;gap:clamp(18px,2vw,26px)">
+        <p style="margin:0">Once the high-fidelity designs were finalized, we prepared the files for a structured handoff to the client. All screens were organized with clear naming conventions, reusable components, and proper spacing guidelines to ensure smooth development.</p>
+        <p style="margin:0">Design specifications, assets, and interaction details were shared to maintain consistency during implementation and to ensure the final product aligned with the intended user experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- THANK YOU -->
+  <section style="padding:clamp(90px,15vw,190px) clamp(20px,5vw,80px);display:flex;align-items:center;justify-content:center;text-align:center">
+    <h2 style="margin:0;font-weight:500;font-size:clamp(52px,11vw,150px);line-height:.95;letter-spacing:-.03em"><span class="serif" style="font-weight:600">Thank</span> You</h2>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#0E0E10;color:#FAFAF7;padding:clamp(60px,9vw,120px) clamp(20px,5vw,80px) clamp(30px,4vw,48px);border-radius:36px 36px 0 0;margin-top:20px">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(24px,3vw,40px)">
+      <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,250,247,.5)">Get in touch</span>
+      <a href="mailto:aryansharmaas100@gmail.com" data-magnetic="0.18" style="text-decoration:none;color:#FAFAF7;font-weight:900;font-size:clamp(40px,9vw,150px);line-height:.9;letter-spacing:-.04em;display:block">
+        Let&rsquo;s <span style="-webkit-text-stroke:2px #FAFAF7;color:transparent">work</span> together
+      </a>
+      <div style="display:flex;flex-wrap:wrap;align-items:stretch;justify-content:center;gap:clamp(14px,1.4vw,20px);width:100%;max-width:640px">
+        <a href="mailto:aryansharmaas100@gmail.com" class="cta" style="flex:1 1 240px;justify-content:center;text-decoration:none;background:#2B4DF4;color:#fff;font-weight:600;font-size:clamp(15px,1.3vw,18px);padding:16px 32px;border-radius:100px">
+          <span class="lbl"><span>Get in touch</span><span>Get in touch</span></span>
+          <span class="arr">&rarr;</span>
+        </a>
+        <a href="Work.dc.html" class="cta viewAllFooter" style="flex:1 1 240px;justify-content:center;text-decoration:none;background:transparent;color:#FAFAF7;border:1.5px solid rgba(250,250,247,.6);font-weight:600;font-size:clamp(15px,1.3vw,18px);padding:16px 32px;border-radius:100px;transition:background .4s ease,color .4s ease,border-color .4s ease">
+          <span class="lbl"><span>View all case studies</span><span>View all case studies</span></span>
+          <span class="arr">&rarr;</span>
+        </a>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;margin-top:clamp(50px,7vw,100px);padding-top:28px;border-top:1px solid rgba(250,250,247,.14);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,250,247,.55)">
+      <span>&copy; {{ year }} Aryan Sharma</span>
+      <div style="display:flex;gap:20px;align-items:center">
+        <a href="https://www.linkedin.com/in/aryansharma100/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social s-li"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <a href="https://www.instagram.com/aryanx_sharma/" target="_blank" rel="noopener" aria-label="Instagram" class="social s-ig"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.12 1.38C1.35 2.67.93 3.34.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.12.66.66 1.33 1.08 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.12-1.38.66-.66 1.08-1.33 1.38-2.12.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.3-.79-.72-1.46-1.38-2.12-.66-.66-1.33-1.08-2.12-1.38-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zM12 16a4 4 0 110-8 4 4 0 010 8z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg></a>
+        <a href="https://x.com/aryansharma_100" target="_blank" rel="noopener" aria-label="X" class="social s-x"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.16 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></a>
+      </div>
+      <span>Made in Gurugram, IN</span>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#DB0004&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false };
+  renderVals() {
+    const ac = this.props.accent || '#DB0004';
+    const open = this.state.menuOpen;
+    return {
+      ac,
+      rootRef: (el) => { if (el) this.root = el; },
+      year: 2026,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      menuStyle: `position:fixed;inset:0;z-index:55;background:#FAFAF7;transition:transform .55s cubic-bezier(.7,0,.2,1),opacity .4s;transform:translateY(${open ? '0' : '-100%'});opacity:${open ? '1' : '0'};pointer-events:${open ? 'auto' : 'none'}`,
+      closeBtnStyle: `position:fixed;top:14px;right:20px;z-index:56;width:44px;height:44px;border-radius:50%;border:1px solid rgba(14,14,16,.15);background:#FAFAF7;color:#0E0E10;font-size:26px;line-height:1;display:${open ? 'flex' : 'none'};align-items:center;justify-content:center`,
+      meta: [
+        { k: 'Role', v: 'Product Designer' },
+        { k: 'Timeline', v: '12–13 weeks' },
+        { k: 'Platform', v: 'Website & Mobile' },
+        { k: 'Year', v: '2025' },
+      ],
+      sidebar: [
+        { k: 'Client', v: 'Infimobile' },
+        { k: 'Tools', v: 'Figma' },
+        { k: 'Website', v: 'infimobile.com' },
+      ],
+      process: [
+        { no: '01', title: 'Research' },
+        { no: '02', title: 'Information Architecture' },
+        { no: '03', title: 'Wireframes' },
+        { no: '04', title: 'High Fidelity — UI' },
+        { no: '05', title: 'Handoff' },
+      ],
+      findings: [
+        {
+          no: '01',
+          title: 'Competitive Analysis',
+          intro: 'We benchmarked key telecom competitors to identify industry standards and uncover growth opportunities:',
+          items: ['Mint Mobile', 'US Mobile', 'Tello', 'Google Fi'],
+        },
+        {
+          no: '02',
+          title: 'Parameters of Analysis',
+          intro: 'We evaluated competitors across the following key areas:',
+          items: ['UX & Information Architecture', 'User Assistance', 'Visual & Brand Language', 'Mascot Integration', 'Content Strategy & Brand Voice', 'Mobile Experience'],
+        },
+        {
+          no: '03',
+          title: 'Key Insights',
+          intro: 'What we learned that shaped the redesign:',
+          items: ['Simplified navigation improves plan discovery and reduces confusion.', 'Clear pricing breakdown builds trust and transparency.', 'Strong brand voice creates a more engaging and memorable experience.', 'Mobile-first structure is critical in telecom platforms.', 'Accessible help sections reduce user frustration.'],
+        },
+      ],
+    };
+  }
+
+  componentDidMount() {
+    this._cleanup = [];
+    const root = this.root || document;
+
+    root.querySelectorAll('[data-magnetic]').forEach((el) => {
+      const s = parseFloat(el.getAttribute('data-magnetic')) || .3;
+      const mm = (e) => { const r = el.getBoundingClientRect(); el.style.transform = `translate(${(e.clientX - (r.left + r.width / 2)) * s}px,${(e.clientY - (r.top + r.height / 2)) * s}px)`; };
+      const lv = () => { el.style.transform = 'translate(0,0)'; };
+      el.style.transition = 'transform .35s cubic-bezier(.2,.8,.2,1)';
+      el.addEventListener('mousemove', mm); el.addEventListener('mouseleave', lv);
+      this._cleanup.push(() => { el.removeEventListener('mousemove', mm); el.removeEventListener('mouseleave', lv); });
+    });
+
+    const bar = root.querySelector('[data-progress]');
+    if (bar) {
+      const onScroll = () => {
+        const h = document.documentElement.scrollHeight - innerHeight;
+        bar.style.width = (h > 0 ? (scrollY / h) * 100 : 0) + '%';
+      };
+      addEventListener('scroll', onScroll, { passive: true }); onScroll();
+      this._cleanup.push(() => removeEventListener('scroll', onScroll));
+    }
+  }
+
+  componentWillUnmount() { (this._cleanup || []).forEach((f) => f()); }
+}
+</script>
+</body>
+</html>

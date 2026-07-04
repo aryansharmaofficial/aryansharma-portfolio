@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#FAFAF7}
+  ::selection{background:#2B4DF4;color:#fff}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+  .seeWork .arr{display:inline-block;width:0;overflow:hidden;opacity:0;transition:width .25s ease,opacity .25s ease,margin .25s ease}
+  .seeWork:hover .arr{width:1em;opacity:1;margin-left:2px}
+</style>
+</helmet>
+
+<div style="--ac:#2B4DF4;font-family:'Archivo',sans-serif;color:#0E0E10;min-height:100svh;display:flex;flex-direction:column;background:#FAFAF7">
+
+  <header style="display:flex;align-items:center;justify-content:space-between;padding:16px clamp(20px,5vw,80px)">
+    <a href="Portfolio.dc.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#0E0E10">
+      <span style="font-weight:900;letter-spacing:-.04em;font-size:23px;line-height:1">AS<span style="color:var(--ac)">.</span></span>
+    </a>
+    <a href="Work.dc.html" style="text-decoration:none;color:#0E0E10;font-weight:700;font-size:15px">&larr; Back to Work</a>
+  </header>
+
+  <main style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:clamp(16px,2vw,24px);padding:40px 24px;overflow:auto">
+    <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(14,14,16,.5);display:flex;align-items:center;gap:10px">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--ac);display:inline-block;animation:blink 1.6s ease-in-out infinite"></span>
+      Case Study &middot; Work in Progress
+    </span>
+    <h1 style="margin:0;font-weight:800;font-size:clamp(28px,4.4vw,64px);letter-spacing:-.03em;line-height:1.05;max-width:34ch;white-space:nowrap">
+      Redesigning Zepto — for solo living
+    </h1>
+    <p style="margin:0;font-size:clamp(16px,1.4vw,20px);color:rgba(14,14,16,.62);max-width:46ch;line-height:1.5">
+      This case study is being written up. Full breakdown of process, screens, and outcomes lands soon.
+    </p>
+    <div style="margin-top:8px;display:flex;align-items:center;gap:12px;font-family:'Space Mono',monospace;font-size:14px;font-weight:700;letter-spacing:.02em;background:var(--ac);color:#FAFAF7;padding:12px 22px;border-radius:8px">
+      Release date
+      <span style="color:#FAFAF7">10 July, 2026</span>
+    </div>
+    <a href="Work.dc.html" class="seeWork" style="margin-top:20px;display:inline-flex;align-items:center;text-decoration:none;color:#0E0E10;font-weight:600;font-size:15px;border-bottom:2px solid #0E0E10;padding-bottom:2px">
+      See other work
+      <span class="arr">&rarr;</span>
+    </a>
+  </main>
+
+  <footer style="display:flex;align-items:center;justify-content:space-between;padding:20px clamp(20px,5vw,80px);font-family:'Space Mono',monospace;font-size:12px;color:rgba(14,14,16,.5)">
+    <span>&copy; 2026 Aryan Sharma</span>
+    <span>Made in Gurugram, IN</span>
+  </footer>
+
+</div>
+
+</x-dc>
+</body>
+</html>

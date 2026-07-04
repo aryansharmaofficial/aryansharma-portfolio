@@ -3,9 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="ext-resource-dependency" content="assets/traqcheck-card.webp" data-resource-id="cardTraq" />
+<meta name="ext-resource-dependency" content="assets/infimobile-card.webp" data-resource-id="cardInfi" />
+<meta name="ext-resource-dependency" content="assets/solarity-card.webp" data-resource-id="cardSolarity" />
+<meta name="ext-resource-dependency" content="assets/zepto-card.webp" data-resource-id="cardZepto" />
+<meta name="ext-resource-dependency" content="assets/Aryan-Sharma-Resume.pdf" data-resource-id="resumePdf" />
 <script src="./support.js"></script>
 </head>
 <body>
+<template id="__bundler_thumbnail" data-bg-color="#FAFAF7">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#FAFAF7"/>
+    <text x="600" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="240" letter-spacing="-8" fill="#0E0E10">AS<tspan fill="#2B4DF4">.</tspan></text>
+  </svg>
+</template>
 <x-dc>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,7 +97,7 @@
       <nav class="navDesk" style="align-items:center;gap:clamp(18px,2.4vw,40px)">
         <a href="About.dc.html" data-cursor="link" class="nlink" style="text-decoration:none;color:#0E0E10;font-weight:500;font-size:15px">About</a>
         <a href="Work.dc.html" data-cursor="link" class="nlink" style="text-decoration:none;color:#0E0E10;font-weight:500;font-size:15px">Work</a>
-        <a href="assets/Aryan-Sharma-Resume.pdf" target="_blank" rel="noopener" data-cursor="link" class="nlink" style="text-decoration:none;color:#0E0E10;font-weight:500;font-size:15px">Resume</a>
+        <a href="{{ resumeUrl }}" target="_blank" rel="noopener" data-cursor="link" class="nlink" style="text-decoration:none;color:#0E0E10;font-weight:500;font-size:15px">Resume</a>
         <a href="mailto:aryansharmaas100@gmail.com" data-cta="1" data-cursor="solid" class="cta" style="text-decoration:none;background:#0E0E10;color:#FAFAF7;font-weight:600;font-size:14px;padding:11px 22px;border-radius:100px">
           <span class="lbl">
             <span>Get in touch&nbsp;&nbsp;<span style="display:inline-block;font-weight:700">&rarr;</span></span>
@@ -106,7 +117,7 @@
     <div style="display:flex;flex-direction:column;gap:6px;padding:90px clamp(20px,7vw,40px) 40px">
       <a href="About.dc.html" onClick="{{ closeMenu }}" style="text-decoration:none;color:#0E0E10;font-weight:800;font-size:44px;letter-spacing:-.03em;padding:10px 0;border-bottom:1px solid rgba(14,14,16,.1)">About</a>
       <a href="Work.dc.html" style="text-decoration:none;color:#0E0E10;font-weight:800;font-size:44px;letter-spacing:-.03em;padding:10px 0;border-bottom:1px solid rgba(14,14,16,.1)">Work</a>
-      <a href="assets/Aryan-Sharma-Resume.pdf" target="_blank" rel="noopener" onClick="{{ closeMenu }}" style="text-decoration:none;color:#0E0E10;font-weight:800;font-size:44px;letter-spacing:-.03em;padding:10px 0;border-bottom:1px solid rgba(14,14,16,.1)">Resume</a>
+      <a href="{{ resumeUrl }}" target="_blank" rel="noopener" onClick="{{ closeMenu }}" style="text-decoration:none;color:#0E0E10;font-weight:800;font-size:44px;letter-spacing:-.03em;padding:10px 0;border-bottom:1px solid rgba(14,14,16,.1)">Resume</a>
       <a href="mailto:aryansharmaas100@gmail.com" style="text-decoration:none;color:var(--ac);font-weight:800;font-size:44px;letter-spacing:-.03em;padding:10px 0">Get in touch &rarr;</a>
     </div>
   </div>
@@ -285,6 +296,7 @@ class Component extends DCLogic {
       ac,
       rootRef: (el) => { if (el) this.root = el; },
       year: 2026,
+      resumeUrl: (window.__resources && window.__resources.resumePdf) || 'assets/Aryan-Sharma-Resume.pdf',
       menuOpen: open,
       toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
       closeMenu: () => this.setState({ menuOpen: false }),
@@ -301,10 +313,10 @@ class Component extends DCLogic {
         { k: 'Status', v: 'Open to opportunities' },
       ],
       projects: [
-        { no: '01', cover: 'TraqCheck', href: 'TraqCheck.dc.html', img: 'assets/traqcheck-card.webp', kind: 'HR Tech · 2026', title: 'TraqCheck — An AI-Powered Recruiting Platform', blurb: 'Redesigning AI hiring & background verification with clearer IA, simpler flows, and scalable AI product pages that build trust and convert.', tags: ['Product Design', 'UX Research', 'Design System'], metric: '', bg: '#7F50FF' },
-        { no: '02', cover: 'Infimobile', href: 'Infimobile.dc.html', img: 'assets/infimobile-card.webp', fit: 'contain', kind: 'Enterprise SaaS · 2025', title: 'Infimobile — Redesigning Business Communication', blurb: 'Redesigned complex enterprise workflows into intuitive experiences, making messaging, campaign management, and navigation easier for business teams.', tags: ['SaaS', 'Enterprise', 'UX Design'], metric: '', bg: '#0E0E10' },
-        { no: '03', cover: 'Solarity', href: 'Solarity.dc.html', img: 'assets/solarity-card.webp', fit: 'cover', kind: 'Clean Energy · 2025', title: 'Solarity — AI-Powered Solar Tracker', blurb: 'A dashboard that helps homeowners spot issues early and understand real energy savings through clear visual insights.', tags: ['Dashboard', 'AI', 'Data Visualization'], metric: '', bg: '#E8F1EC' },
-        { no: '04', cover: 'Zepto', href: 'ComingSoon.dc.html', img: 'assets/zepto-card.webp', fit: 'cover', kind: 'Quick Commerce · 2025', title: 'Redesigning Zepto — for solo living', blurb: 'Rethinking quick-commerce ordering around single-person households — smaller baskets, faster decisions, less waste.', tags: ['Product Design', 'UX Research', 'Mobile'], metric: '', bg: '#F3ECF4' },
+        { no: '01', cover: 'TraqCheck', href: 'TraqCheck.dc.html', img: (window.__resources && window.__resources.cardTraq) || 'assets/traqcheck-card.webp', kind: 'HR Tech · 2026', title: 'TraqCheck — An AI-Powered Recruiting Platform', blurb: 'Redesigning AI hiring & background verification with clearer IA, simpler flows, and scalable AI product pages that build trust and convert.', tags: ['Product Design', 'UX Research', 'Design System'], metric: '', bg: '#7F50FF' },
+        { no: '02', cover: 'Infimobile', href: 'Infimobile.dc.html', img: (window.__resources && window.__resources.cardInfi) || 'assets/infimobile-card.webp', fit: 'contain', kind: 'Enterprise SaaS · 2025', title: 'Infimobile — Redesigning Business Communication', blurb: 'Redesigned complex enterprise workflows into intuitive experiences, making messaging, campaign management, and navigation easier for business teams.', tags: ['SaaS', 'Enterprise', 'UX Design'], metric: '', bg: '#0E0E10' },
+        { no: '03', cover: 'Solarity', href: 'Solarity.dc.html', img: (window.__resources && window.__resources.cardSolarity) || 'assets/solarity-card.webp', fit: 'cover', kind: 'Clean Energy · 2025', title: 'Solarity — AI-Powered Solar Tracker', blurb: 'A dashboard that helps homeowners spot issues early and understand real energy savings through clear visual insights.', tags: ['Dashboard', 'AI', 'Data Visualization'], metric: '', bg: '#E8F1EC' },
+        { no: '04', cover: 'Zepto', href: 'ComingSoon.dc.html', img: (window.__resources && window.__resources.cardZepto) || 'assets/zepto-card.webp', fit: 'cover', kind: 'Quick Commerce · 2025', title: 'Redesigning Zepto — for solo living', blurb: 'Rethinking quick-commerce ordering around single-person households — smaller baskets, faster decisions, less waste.', tags: ['Product Design', 'UX Research', 'Mobile'], metric: '', bg: '#F3ECF4' },
       ],
     };
   }
