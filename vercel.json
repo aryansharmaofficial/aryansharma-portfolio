@@ -1,5 +1,13 @@
 {
+  "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/Portfolio.dc.html" }
+    { "source": "/", "destination": "/Portfolio.dc.html" },
+    { "source": "/About", "destination": "/About.dc.html" },
+    { "source": "/Work", "destination": "/Work.dc.html" },
+    { "source": "/TraqCheck", "destination": "/TraqCheck.dc.html" },
+    { "source": "/Infimobile", "destination": "/Infimobile.dc.html" },
+    { "source": "/Solarity", "destination": "/Solarity.dc.html" },
+    { "source": "/CaseStudy", "destination": "/CaseStudy.dc.html" },
+    { "source": "/ComingSoon", "destination": "/ComingSoon.dc.html" }
   ]
 }
