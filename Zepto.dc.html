@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:#FAFAF7}
+  ::selection{background:#5B21B6;color:#fff}
+  img{display:block;max-width:100%}
+  a{color:#5B21B6}
+  a:hover{color:#1A0533}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:none}}
+  .navDesk{display:flex}
+  .navBurger{display:none}
+  .twoCol{grid-template-columns:0.85fr 1.15fr}
+  .metaGrid{grid-template-columns:repeat(4,1fr)}
+  .probGrid{grid-template-columns:repeat(3,1fr)}
+  .findGrid{grid-template-columns:repeat(3,1fr)}
+  .decGrid{grid-template-columns:repeat(2,1fr)}
+  .phoneGrid{grid-template-columns:repeat(4,1fr)}
+  .highGrid{grid-template-columns:1fr 1fr}
+  .swatchGrid{grid-template-columns:repeat(4,1fr)}
+  .table{grid-template-columns:1.2fr 1fr 1fr}
+  @media (max-width:900px){
+    .navDesk{display:none}
+    .navBurger{display:flex}
+    .twoCol{grid-template-columns:1fr;gap:20px}
+    .metaGrid{grid-template-columns:repeat(2,1fr)}
+    .probGrid{grid-template-columns:1fr}
+    .findGrid{grid-template-columns:1fr}
+    .decGrid{grid-template-columns:1fr}
+    .phoneGrid{grid-template-columns:repeat(2,1fr)}
+    .highGrid{grid-template-columns:1fr}
+    .swatchGrid{grid-template-columns:repeat(2,1fr)}
+    .table{grid-template-columns:1fr}
+  }
+  .cta{position:relative;display:inline-flex;align-items:center;text-decoration:none}
+  .cta .lbl{position:relative;display:inline-block;overflow:hidden;line-height:1.25}
+  .cta .lbl > span{display:block;transition:transform .45s cubic-bezier(.65,0,.2,1)}
+  .cta .lbl > span + span{position:absolute;top:0;left:0;width:100%;transform:translateY(112%)}
+  .cta:hover .lbl > span:first-child{transform:translateY(-112%)}
+  .cta:hover .lbl > span + span{transform:translateY(0)}
+  .cta .arr{display:inline-flex;align-items:center;justify-content:center;width:.9em;margin-left:.4em;opacity:0;transform:translateX(-7px);transition:opacity .35s ease,transform .42s cubic-bezier(.65,0,.2,1)}
+  .cta:hover .arr{opacity:1;transform:translateX(0)}
+  .viewAllFooter:hover{background:#fff;color:#0E0E10;border-color:#fff}
+  .social{color:rgba(250,250,247,.85);display:inline-flex;align-items:center;justify-content:center;transition:color .35s ease,transform .35s cubic-bezier(.65,0,.2,1)}
+  .social svg{width:21px;height:21px;display:block;fill:currentColor}
+  .social:hover{transform:translateY(-2px)}
+  .s-li:hover{color:#0A66C2}.s-ig:hover{color:#E4405F}.s-x:hover{color:#E5B438}
+  .nlink{position:relative}
+  .nlink::after{content:'';position:absolute;left:0;bottom:-4px;height:2px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform .35s cubic-bezier(.65,0,.2,1)}
+  .nlink:hover::after{transform:scaleX(1)}
+  header{transition:background .45s ease,border-color .45s ease}
+  header a, header [data-cta], header .navBurger span{transition:color .4s ease,background .4s ease,border-color .4s ease}
+  .stripe{background-image:repeating-linear-gradient(135deg,rgba(14,14,16,.05) 0 2px,transparent 2px 14px)}
+  .phoneCap{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,14,16,.45)}
+  .lift{transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s ease}
+  .lift:hover{transform:translateY(-5px);box-shadow:0 18px 40px -22px rgba(46,16,101,.4)}
+  .procRow button:hover span.procTitle{color:#5B21B6}
+  .swatch{transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+  .swatch:hover{transform:translateY(-4px)}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="--ac:{{ ac }};position:relative;background:#FAFAF7;color:#0E0E10;font-family:'Archivo',sans-serif;overflow-x:clip;min-height:100vh">
+
+  <div data-progress style="position:fixed;top:0;left:0;height:3px;width:0%;background:var(--ac);z-index:70;transition:width .1s linear"></div>
+
+  <header style="position:sticky;top:0;z-index:60;background:rgba(250,250,247,.6);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(14,14,16,.06)">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:16px clamp(20px,5vw,80px)">
+      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:#0E0E10">
+        <span style="font-weight:900;letter-spacing:-.04em;font-size:23px;line-height:1">AS<span style="color:#2B4DF4">.</span></span>
+      </a>
+      <nav class="navDesk" style="align-items:center;gap:clamp(18px,2.4vw,40px)">
+        <a href="/About" class="nlink" style="text-decoration:none;color:#0E0E10;font-weight:500;font-size:15px">About</a>
+        <a href="/Work" class="nlink" style="text-decoration:none;color:#0E0E10;font-weight:500;font-size:15px">Work</a>
+        <a href="assets/Aryan-Sharma-Resume.pdf" target="_blank" rel="noopener" class="nlink" style="text-decoration:none;color:#0E0E10;font-weight:500;font-size:15px">Resume</a>
+        <a href="mailto:aryansharmaas100@gmail.com" data-cta="1" class="cta" style="text-decoration:none;background:#0E0E10;color:#FAFAF7;font-weight:600;font-size:14px;padding:11px 22px;border-radius:100px"><span class="lbl"><span>Get in touch&nbsp;&nbsp;<span style="display:inline-block;font-weight:700">&rarr;</span></span><span>Get in touch&nbsp;&nbsp;<span style="display:inline-block;font-weight:700">&rarr;</span></span></span></a>
+      </nav>
+      <a class="navBurger" href="/Work" aria-label="Work" style="align-items:center;text-decoration:none;color:#0E0E10;font-weight:700;font-size:14px">&larr; Work</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section style="padding:clamp(40px,6vw,90px) clamp(20px,5vw,80px) clamp(28px,3.4vw,46px)">
+    <a href="/Work" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:rgba(14,14,16,.55);margin-bottom:clamp(20px,3vw,40px)">&larr; All work</a>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+      <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);font-weight:700">E-Commerce &middot; Mobile App &middot; 2026</span>
+      <span style="flex:1;height:1px;background:rgba(14,14,16,.14);max-width:200px"></span>
+    </div>
+    <h1 style="margin:0;font-weight:900;font-size:clamp(40px,7vw,104px);line-height:.95;letter-spacing:-.04em;max-width:16ch">Zepto, built for people who live alone</h1>
+    <p style="margin:clamp(20px,2.6vw,34px) 0 0;max-width:60ch;font-size:clamp(17px,1.5vw,22px);line-height:1.55;color:rgba(14,14,16,.66)">A redesign of Zepto&rsquo;s grocery app for young people living solo in Indian cities. It adds right-sized packs, a simple budget tracker, and a mode that reshapes the app around one person instead of a whole family.</p>
+
+    <div class="metaGrid" style="display:grid;gap:clamp(18px,2vw,30px);margin-top:clamp(34px,4.5vw,64px);border-top:1px solid rgba(14,14,16,.16);padding-top:clamp(22px,2.6vw,34px)">
+      <sc-for list="{{ meta }}" as="m" hint-placeholder-count="4">
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.45);margin-bottom:8px">{{ m.k }}</div>
+          <div style="font-weight:600;font-size:clamp(15px,1.2vw,18px)">{{ m.v }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- COVER -->
+  <section style="padding:0">
+    <img src="uploads/Hero 2.png" alt="Zepto Solo Living app on iPhone" style="display:block;width:100%;height:auto" />
+  </section>
+
+  <!-- 01 OVERVIEW -->
+  <section style="padding:clamp(60px,8vw,130px) clamp(20px,5vw,80px) clamp(20px,3vw,40px)">
+    <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">01 &middot; Overview</span>
+    <div class="twoCol" style="display:grid;gap:clamp(30px,5vw,80px);margin-top:14px">
+      <h2 style="margin:0;font-weight:800;font-size:clamp(30px,4vw,58px);line-height:1.02;letter-spacing:-.03em">The project</h2>
+      <div style="font-size:clamp(17px,1.4vw,21px);line-height:1.6;color:rgba(14,14,16,.7)">
+        <p style="margin:0 0 20px">Zepto delivers groceries in ten minutes across 25+ Indian cities. It&rsquo;s fast and it works. But almost every part of it assumes you&rsquo;re shopping for a family.</p>
+        <p style="margin:0 0 20px">I designed for the person it forgets: someone in their twenties, living alone in Bangalore or Gurugram, on their first salary, cooking for one. For them the big packs, family quantities, and total silence around spending make every order feel a little off.</p>
+        <p style="margin:0;font-weight:700;color:#1A0533">So I rebuilt the experience around a single person, without turning it into a different app.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section style="padding:clamp(40px,6vw,90px) clamp(20px,5vw,80px)">
+    <h3 style="margin:0 0 16px;font-weight:800;font-size:clamp(23px,2.4vw,34px);letter-spacing:-.02em">The problem</h3>
+    <p style="margin:0 0 clamp(30px,4vw,50px);max-width:68ch;font-size:clamp(15px,1.15vw,17px);line-height:1.65;color:rgba(14,14,16,.68)">People living alone in Indian metros are a fast-growing group: students, young professionals, remote workers. They buy less, waste more, and have no easy way to stay on top of what they spend.</p>
+    <div class="probGrid" style="display:grid;gap:clamp(20px,2.4vw,28px)">
+      <sc-for list="{{ problems }}" as="p" hint-placeholder-count="3">
+        <div class="lift" style="display:flex;flex-direction:column;background:#201C1C;border-radius:24px;padding:clamp(26px,2.8vw,38px);min-height:clamp(320px,30vw,440px)">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.28);font-family:'Space Mono',monospace;font-size:13px;color:#fff;font-weight:700">{{ p.no }}</span>
+          <h4 style="margin:auto 0 12px;font-weight:800;font-size:clamp(20px,1.7vw,26px);letter-spacing:-.01em;line-height:1.2;color:#fff">{{ p.title }}</h4>
+          <p style="margin:0;font-size:clamp(15px,1.1vw,16px);line-height:1.6;color:rgba(255,255,255,.62)">{{ p.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- 02 PROCESS -->
+  <section style="padding:clamp(60px,8vw,120px) clamp(20px,5vw,80px)">
+    <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">02 &middot; Process</span>
+    <div class="twoCol" style="display:grid;gap:clamp(30px,5vw,80px);align-items:start;margin-top:14px">
+      <h2 style="margin:0;font-weight:800;font-size:clamp(34px,4.6vw,72px);letter-spacing:-.03em;line-height:1;position:sticky;top:120px">Process followed</h2>
+
+      <div class="procRow">
+        <sc-for list="{{ processView }}" as="p" hint-placeholder-count="5">
+          <div style="border-top:1px solid rgba(14,14,16,.12);display:flex;align-items:center;gap:clamp(20px,3vw,50px);padding:clamp(22px,2.6vw,34px) 0">
+            <span style="font-family:'Space Mono',monospace;font-size:clamp(18px,1.8vw,24px);font-weight:700;color:var(--ac);min-width:40px">{{ p.n }}</span>
+            <span style="flex:1;font-weight:700;font-size:clamp(18px,1.8vw,26px);letter-spacing:-.01em">{{ p.t }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSIGHT BAND -->
+  <section style="padding:0 clamp(20px,5vw,80px) clamp(60px,8vw,110px)">
+    <div data-nav-dark style="position:relative;overflow:hidden;background:linear-gradient(105deg,#5B2BD6 0%,#7C3AED 42%,#A526D9 78%,#B026C9 100%);color:#fff;border-radius:28px;padding:clamp(40px,6vw,90px)">
+      <div style="position:absolute;inset:0;opacity:.14;mix-blend-mode:overlay;pointer-events:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22 stitchTiles=%22stitch%22/></filter><rect width=%22160%22 height=%22160%22 filter=%22url(%23n)%22/></svg>')"></div>
+      <div style="position:relative">
+        <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6)">The insight everything hinges on</span>
+        <p style="margin:clamp(18px,2.4vw,30px) 0 0;max-width:22ch;font-weight:800;font-size:clamp(28px,4.4vw,64px);line-height:1.05;letter-spacing:-.03em">People living alone don&rsquo;t want a smaller Zepto.</p>
+        <p style="margin:clamp(18px,2vw,26px) 0 0;max-width:58ch;font-size:clamp(17px,1.5vw,22px);line-height:1.55;color:rgba(255,255,255,.85)">They want the whole catalogue, just sized, filtered, and tracked for one person. That&rsquo;s a mode, not a separate app.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY FINDINGS -->
+  <section style="padding:0 clamp(20px,5vw,80px) clamp(60px,8vw,110px)">
+    <h3 style="margin:0 0 clamp(30px,3.4vw,44px);font-weight:800;font-size:clamp(23px,2.8vw,38px);letter-spacing:-.02em">What the research turned up</h3>
+    <div class="findGrid" style="display:grid;gap:clamp(20px,2.4vw,28px)">
+      <sc-for list="{{ findings }}" as="f" hint-placeholder-count="3">
+        <div style="border-top:2px solid var(--ac);padding-top:18px">
+          <span style="font-family:'Space Mono',monospace;font-size:12px;color:rgba(14,14,16,.45)">{{ f.no }}</span>
+          <h4 style="margin:10px 0 12px;font-weight:800;font-size:clamp(18px,1.5vw,22px);letter-spacing:-.01em;line-height:1.25">{{ f.title }}</h4>
+          <p style="margin:0;font-size:clamp(15px,1.1vw,16px);line-height:1.6;color:rgba(14,14,16,.66)">{{ f.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- DECISIONS MOCKUP -->
+  <section style="padding:clamp(20px,3vw,40px) 0 clamp(30px,4vw,50px)">
+    <img src="assets/zepto-decisions-mockups.webp" alt="Budget tracker, order tracking and the Just for Me onboarding step" loading="lazy" style="display:block;width:100%;height:auto" />
+  </section>
+
+  <!-- DESIGN DECISIONS -->
+  <section style="padding:clamp(60px,8vw,110px) clamp(20px,5vw,80px);background:#F3EFFB">
+    <h3 style="margin:0 0 10px;font-weight:800;font-size:clamp(23px,2.8vw,38px);letter-spacing:-.02em">The decisions that shaped it</h3>
+    <p style="margin:0 0 clamp(30px,3.4vw,44px);max-width:64ch;font-size:clamp(15px,1.1vw,17px);line-height:1.6;color:rgba(14,14,16,.65)">Four calls that did most of the work. Each one traces back to a real problem, not a preference.</p>
+    <div class="decGrid" style="display:grid;gap:clamp(20px,2.4vw,28px)">
+      <sc-for list="{{ decisions }}" as="d" hint-placeholder-count="4">
+        <div class="lift" style="background:#fff;border-radius:20px;padding:clamp(24px,2.6vw,34px)">
+          <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac);font-weight:700">{{ d.tag }}</span>
+          <h4 style="margin:12px 0 12px;font-weight:800;font-size:clamp(18px,1.5vw,22px);letter-spacing:-.01em;line-height:1.25">{{ d.title }}</h4>
+          <p style="margin:0;font-size:clamp(15px,1.1vw,16px);line-height:1.6;color:rgba(14,14,16,.66)">{{ d.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- 03 VISUAL DIRECTION -->
+  <section style="padding:clamp(60px,8vw,120px) clamp(20px,5vw,80px) clamp(20px,3vw,40px)">
+    <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">03 &middot; Visual direction</span>
+    <h2 style="margin:14px 0 clamp(30px,4vw,50px);font-weight:800;font-size:clamp(30px,4vw,58px);letter-spacing:-.03em;line-height:1">Type &amp; colour</h2>
+
+    <div style="width:100vw;margin-left:calc(50% - 50vw);margin-bottom:clamp(44px,6vw,80px)">
+      <img src="assets/zepto-type.webp" alt="One typeface, five sizes: Inter, shown in Regular, Medium, Semibold and Bold" loading="lazy" style="display:block;width:100%;height:auto" />
+    </div>
+
+    <img src="assets/zepto-palette.webp" alt="The colour palette: Solo violet #631CBD, Deep plum #320C69, CTA coral #FF2D55, Lilac #EFE6F8, Text colour #111827, Mid grey #6B7681" loading="lazy" style="display:block;width:100%;height:auto" />
+  </section>
+
+  <!-- 04 THE SCREENS -->
+  <section style="padding:clamp(60px,8vw,120px) clamp(20px,5vw,80px) clamp(16px,2vw,28px)">
+    <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">04 &middot; The screens</span>
+    <h2 style="margin:14px 0 clamp(14px,1.6vw,22px);font-weight:800;font-size:clamp(30px,4vw,58px);letter-spacing:-.03em;line-height:1">From first tap to doorstep</h2>
+    <p style="margin:0;max-width:60ch;font-size:clamp(15px,1.15vw,17px);line-height:1.65;color:rgba(14,14,16,.68)">A walk through the whole journey: a two-step onboarding that learns who you are, a rebuilt home and navigation, and the budget-aware flow that runs from product to checkout to your door.</p>
+  </section>
+
+  <!-- ONBOARDING FLOW -->
+  <section style="padding:clamp(24px,3vw,44px) clamp(20px,5vw,80px) clamp(30px,4vw,50px)">
+    <h3 style="margin:0 0 clamp(24px,2.8vw,38px);font-weight:800;font-size:clamp(23px,2.8vw,38px);letter-spacing:-.02em">Onboarding, step by step</h3>
+    <div class="phoneGrid" style="display:grid;gap:clamp(20px,2.4vw,32px);max-width:1200px;margin:0 auto">
+      <sc-for list="{{ onboarding }}" as="o" hint-placeholder-count="4">
+        <div>
+          <img src="{{ o.img }}" alt="{{ o.title }}" loading="lazy" style="display:block;width:100%;height:auto" />
+          <div style="margin-top:clamp(12px,1.4vw,18px)">
+            <span class="phoneCap">{{ o.step }}</span>
+            <h4 style="margin:6px 0 6px;font-weight:800;font-size:clamp(17px,1.4vw,20px);letter-spacing:-.01em">{{ o.title }}</h4>
+            <p style="margin:0;font-size:clamp(14px,1vw,15px);line-height:1.55;color:rgba(14,14,16,.66)">{{ o.body }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- NAV REDESIGN -->
+  <section style="padding:clamp(30px,4vw,50px) clamp(20px,5vw,80px)">
+    <h3 style="margin:0 0 10px;font-weight:800;font-size:clamp(23px,2.8vw,38px);letter-spacing:-.02em">Rebuilding the bottom navigation</h3>
+    <p style="margin:0 0 clamp(28px,3vw,40px);max-width:62ch;font-size:clamp(15px,1.15vw,17px);line-height:1.65;color:rgba(14,14,16,.68)">The old bar spent two of its five slots on Buy Again and a Cafe promo and buried anything to do with money. The redesign gives the budget tracker a permanent home and clears out the noise.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(18px,2.2vw,28px);margin-bottom:clamp(30px,3.4vw,44px)">
+      <div style="flex:1 1 320px">
+        <span class="phoneCap" style="color:#B4341F">Before</span>
+        <div style="margin-top:10px;border-radius:18px;overflow:hidden;border:1px solid rgba(14,14,16,.1);background:#fff;display:flex;align-items:center;justify-content:center;padding:clamp(20px,2.4vw,32px) clamp(14px,1.6vw,20px)">
+          <img src="assets/nav-old.webp" alt="Old bottom navigation with Home, Categories, Buy Again, Cafe and a Ghar promo" loading="lazy" style="display:block;width:100%;height:auto" />
+        </div>
+      </div>
+      <div style="flex:1 1 320px">
+        <span class="phoneCap" style="color:var(--ac)">After</span>
+        <div style="margin-top:10px;border-radius:18px;overflow:hidden;border:1px solid rgba(99,28,189,.25);background:#fff;display:flex;align-items:center;justify-content:center;padding:clamp(20px,2.4vw,32px) clamp(14px,1.6vw,20px)">
+          <img src="assets/nav-new.webp" alt="New bottom navigation with Home, Categories, Tracker and Offers" loading="lazy" style="display:block;width:100%;height:auto" />
+        </div>
+      </div>
+    </div>
+    <div class="findGrid" style="display:grid;gap:clamp(18px,2vw,28px)">
+      <sc-for list="{{ navPoints }}" as="n" hint-placeholder-count="3">
+        <div style="border-top:2px solid var(--ac);padding-top:16px">
+          <h4 style="margin:0 0 8px;font-weight:800;font-size:clamp(16px,1.3vw,19px);letter-spacing:-.01em;line-height:1.25">{{ n.title }}</h4>
+          <p style="margin:0;font-size:clamp(14px,1.05vw,15px);line-height:1.6;color:rgba(14,14,16,.66)">{{ n.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- CORE APP HIGHLIGHTS -->
+  <section style="padding:clamp(30px,4vw,50px) clamp(20px,5vw,80px) clamp(60px,8vw,110px)">
+    <h3 style="margin:0 0 clamp(30px,3.4vw,44px);font-weight:800;font-size:clamp(23px,2.8vw,38px);letter-spacing:-.02em">The core experience</h3>
+    <div style="display:flex;flex-direction:column;gap:clamp(48px,6vw,84px)">
+      <sc-for list="{{ highlights }}" as="h" hint-placeholder-count="5">
+        <div class="highGrid" style="display:grid;gap:clamp(24px,3vw,50px);align-items:center">
+          <div style="{{ h.imgFirst }}">
+            <sc-if value="{{ h.img2 }}" hint-placeholder-val="">
+              <div style="display:flex;justify-content:center;gap:clamp(12px,1.4vw,20px)">
+                <img src="{{ h.img }}" alt="{{ h.title }}" loading="lazy" style="display:block;width:48%;max-width:230px;height:auto" />
+                <img src="{{ h.img2 }}" alt="{{ h.title }} detail" loading="lazy" style="display:block;width:48%;max-width:230px;height:auto" />
+              </div>
+            </sc-if>
+            <sc-if value="{{ h.single }}" hint-placeholder-val="{{ true }}">
+              <img src="{{ h.img }}" alt="{{ h.title }}" loading="lazy" style="display:block;width:100%;max-width:320px;margin:0 auto;height:auto" />
+            </sc-if>
+          </div>
+          <div style="{{ h.txtFirst }}">
+            <span class="phoneCap">{{ h.cap }}</span>
+            <h4 style="margin:8px 0 12px;font-weight:800;font-size:clamp(20px,1.9vw,26px);letter-spacing:-.01em">{{ h.title }}</h4>
+            <p style="margin:0;font-size:clamp(15px,1.15vw,18px);line-height:1.65;color:rgba(14,14,16,.68);max-width:48ch">{{ h.body }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- THANK YOU -->
+  <section style="padding:clamp(20px,3vw,40px) 0 0">
+    <img src="assets/zepto-thankyou.webp" alt="Thank you" loading="lazy" style="display:block;width:100%;height:auto" />
+  </section>
+
+  <!-- FOOTER -->
+  <footer data-nav-dark style="background:#0E0E10;color:#FAFAF7;padding:clamp(60px,9vw,120px) clamp(20px,5vw,80px) clamp(30px,4vw,48px);border-radius:0;margin-top:0">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(24px,3vw,40px)">
+      <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(250,250,247,.5)">Get in touch</span>
+      <a href="mailto:aryansharmaas100@gmail.com" data-magnetic="0.18" style="text-decoration:none;color:#FAFAF7;font-weight:900;font-size:clamp(40px,9vw,150px);line-height:.9;letter-spacing:-.04em;display:block">
+        Let&rsquo;s <span style="-webkit-text-stroke:2px #FAFAF7;color:transparent">work</span> together
+      </a>
+      <div style="display:flex;flex-wrap:wrap;align-items:stretch;justify-content:center;gap:clamp(14px,1.4vw,20px);width:100%;max-width:640px">
+        <a href="mailto:aryansharmaas100@gmail.com" class="cta" style="flex:1 1 240px;justify-content:center;text-decoration:none;background:#2B4DF4;color:#fff;font-weight:600;font-size:clamp(15px,1.3vw,18px);padding:16px 32px;border-radius:100px">
+          <span class="lbl"><span>Get in touch</span><span>Get in touch</span></span>
+          <span class="arr">&rarr;</span>
+        </a>
+        <a href="/Work" class="cta viewAllFooter" style="flex:1 1 240px;justify-content:center;text-decoration:none;background:transparent;color:#FAFAF7;border:1.5px solid rgba(250,250,247,.6);font-weight:600;font-size:clamp(15px,1.3vw,18px);padding:16px 32px;border-radius:100px;transition:background .4s ease,color .4s ease,border-color .4s ease">
+          <span class="lbl"><span>View all case studies</span><span>View all case studies</span></span>
+          <span class="arr">&rarr;</span>
+        </a>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;margin-top:clamp(50px,7vw,100px);padding-top:28px;border-top:1px solid rgba(250,250,247,.14);font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(250,250,247,.55)">
+      <span>&copy; {{ year }} Aryan Sharma</span>
+      <div style="display:flex;gap:20px;align-items:center">
+        <a href="https://www.linkedin.com/in/aryansharma100/" target="_blank" rel="noopener" aria-label="LinkedIn" class="social s-li"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <a href="https://www.instagram.com/aryanx_sharma/" target="_blank" rel="noopener" aria-label="Instagram" class="social s-ig"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.12 1.38C1.35 2.67.93 3.34.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.12.66.66 1.33 1.08 2.12 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.12-1.38.66-.66 1.08-1.33 1.38-2.12.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.3-.79-.72-1.46-1.38-2.12-.66-.66-1.33-1.08-2.12-1.38-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1018.16 12 6.16 6.16 0 0012 5.84zM12 16a4 4 0 110-8 4 4 0 010 8z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg></a>
+        <a href="https://x.com/aryansharma_100" target="_blank" rel="noopener" aria-label="X" class="social s-x"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.16 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg></a>
+      </div>
+      <span>Made in Gurugram, IN</span>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#5B21B6&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { openStep: 0, copied: null };
+  renderVals() {
+    const ac = this.props.accent || '#5B21B6';
+    const openStep = this.state.openStep;
+
+    const steps = [
+      { n: '01', t: 'Research', body: 'Talked to people who live alone about how they actually shop, and looked at how other apps handle pack sizes, budgets, and personalisation.' },
+      { n: '02', t: 'Framing the problem', body: 'Turned a pile of messy interview notes into three clear problems that were worth solving.' },
+      { n: '03', t: 'UX exploration', body: 'Sketched the flows for sign-up, the home screen, and the tracker on paper before touching any visuals.' },
+      { n: '04', t: 'Visual direction', body: 'Set the type scale, the colour, and the purple language that marks everything belonging to Solo Living.' },
+      { n: '05', t: 'High-fidelity wireframes', body: 'Built the twelve final screens and their main states, ready to hand off.' },
+    ];
+    const processView = steps.map((s, i) => ({
+      n: s.n, t: s.t, body: s.body,
+      onClick: () => this.setState((st) => ({ openStep: st.openStep === i ? -1 : i })),
+      detailStyle: i === openStep ? 'max-height:240px;opacity:1;margin-top:0' : 'max-height:0;opacity:0;margin-top:0',
+      signStyle: i === openStep ? 'transform:rotate(90deg);opacity:0' : 'transform:rotate(0deg);opacity:1',
+    }));
+
+    const rawColors = [
+      { name: 'Solo Violet', hex: '#5B21B6', use: 'Solo Mode, tags, budget ring, primary actions' },
+      { name: 'Deep Plum', hex: '#2E1065', use: 'Feature banners, dark surfaces' },
+      { name: 'CTA Coral', hex: '#E5383B', use: 'Add to cart, Pay, main buttons' },
+      { name: 'Fresh Green', hex: '#16A34A', use: 'On-budget, ticks, free delivery' },
+      { name: 'Ink', hex: '#1A0533', use: 'Headings and primary text' },
+      { name: 'Lilac', hex: '#EDE6F7', use: 'Cards, sheets, soft fills' },
+      { name: 'Mid Grey', hex: '#6B7280', use: 'Secondary text and labels' },
+      { name: 'Surface', hex: '#F7F6FB', use: 'App background' },
+    ];
+    const colorsView = rawColors.map((c, i) => ({
+      name: c.name, hex: c.hex, use: c.use,
+      label: this.state.copied === i ? 'Copied \u2713' : c.hex,
+      onClick: () => {
+        try { navigator.clipboard && navigator.clipboard.writeText(c.hex); } catch (e) {}
+        this.setState({ copied: i });
+        setTimeout(() => this.setState((st) => (st.copied === i ? { copied: null } : null)), 1300);
+      },
+    }));
+
+    return {
+      ac,
+      rootRef: (el) => { if (el) this.root = el; },
+      year: 2026,
+      meta: [
+        { k: 'Role', v: 'Product Designer' },
+        { k: 'What I did', v: 'Research, UX, UI' },
+        { k: 'Platform', v: 'iOS app' },
+        { k: 'Year', v: '2026' },
+      ],
+      problems: [
+        { no: '01', title: 'Packs are too big', body: 'The app pushes family sizes first. Buy a 5kg bag of flour or a dozen eggs when you live alone, and most of it goes off before you finish it.' },
+        { no: '02', title: 'You can\u2019t see your spending', body: 'There\u2019s no way to know what you\u2019ve spent on groceries this month. No budget, no running total, no nudge at the cart.' },
+        { no: '03', title: 'It never learns who you are', body: 'Sign up, enter an OTP, land on the home screen. The app never asks who it\u2019s for, so it treats everyone the same.' },
+      ],
+      processView,
+      findings: [
+        { no: '01', title: 'Waste is what hurts most', body: '\u201cI buy a 1kg curd because I never see a 200g one\u201d came up again and again. The small sizes exist. They\u2019re just hidden.' },
+        { no: '02', title: 'People already track spending', body: 'Most solo shoppers kept a rough grocery total in Notes or a spreadsheet, or gave up. An in-app tracker would replace real effort.' },
+        { no: '03', title: 'One good question feels helpful', body: 'Asking \u201cshopping for yourself or a family?\u201d during sign-up felt natural, not nosy, as long as it stayed to one question and paid off straight away.' },
+      ],
+      decisions: [
+        { tag: 'Consistency', title: 'Solo Mode is a switch, not a wall', body: 'A separate \u201cSolo Zepto\u201d would split the brand and double the upkeep. Instead it\u2019s a toggle on the home screen. Flip between Solo and Full Pack whenever you like.' },
+        { tag: 'Priority', title: 'The tracker lives in the main nav', body: 'It sits in the bottom bar, not buried in settings. A ring, the amount left, one action. Where you put it says how much it matters.' },
+        { tag: 'Alignment', title: 'Budgets reset with your salary', body: 'The month resets on the 1st, in line with payday. Your first month is prorated from the day you join, shown right in the tracker.' },
+        { tag: 'Feedback', title: 'See the cost before you commit', body: 'Every product shows \u201cAdds \u20b9550 \u00b7 \u20b91,250 left this month\u201d under the price, so the budget is in front of you the moment you decide.' },
+      ],
+      typeRows: [
+        { role: 'Display / hero', weight: 'Bold', size: '28\u201336px' },
+        { role: 'Section heading', weight: 'Semi Bold', size: '18\u201322px' },
+        { role: 'Body', weight: 'Regular', size: '13\u201315px' },
+        { role: 'Labels / tags', weight: 'Semi Bold', size: '10\u201312px' },
+        { role: 'Helper text', weight: 'Regular', size: '10\u201311px' },
+      ],
+      colorsView,
+      screens: [
+        { title: 'Phone number', label: 'onboarding \u00b7 phone entry' },
+        { title: 'OTP', label: 'onboarding \u00b7 verify' },
+        { title: 'Solo or Full Pack', label: 'onboarding \u00b7 mode select' },
+        { title: 'Set a budget', label: 'onboarding \u00b7 budget' },
+        { title: 'Home', label: 'core app \u00b7 home' },
+        { title: 'Product page', label: 'core app \u00b7 PDP' },
+        { title: 'Cart', label: 'core app \u00b7 cart' },
+        { title: 'Order tracking', label: 'core app \u00b7 tracking' },
+      ],
+      onboarding: [
+        { step: 'Step 01 \u00b7 Phone', img: 'assets/onb-1-phone.webp', title: 'Enter a phone number', body: 'No email or password \u2014 just a number and Continue. The single fastest way in.' },
+        { step: 'Step 02 \u00b7 Verify', img: 'assets/onb-2-otp.webp', title: 'Confirm the OTP', body: 'A six-digit code auto-fills from the SMS, so most people never touch the keypad.' },
+        { step: 'Step 03 \u00b7 Who for', img: 'assets/onb-3-mode.webp', title: 'Solo or Full Pack', body: 'One question: shopping just for you, or for a family? It reshapes the whole app.' },
+        { step: 'Step 04 \u00b7 Budget', img: 'assets/onb-4-budget.webp', title: 'Set a monthly budget', body: 'Pick a grocery budget for the month. It seeds the tracker from the very first session.' },
+      ],
+      navPoints: [
+        { title: 'The tracker gets a permanent slot', body: 'Spending moves out of settings and into the bar itself, so the budget is one tap away from anywhere in the app.' },
+        { title: 'Less noise, clearer intent', body: 'Buy Again and the Cafe promo made way for Categories, Tracker and Offers \u2014 the destinations people actually reach for.' },
+        { title: 'One system for icons and state', body: 'Consistent line icons and a single coral accent for the active tab replace the mixed, promo-heavy old set.' },
+      ],
+      highlights: [
+        { cap: 'home \u00b7 solo living', img: 'assets/app-home.webp', img2: '', single: true, title: 'Solo Living, right at the top', body: 'A toggle in the header shows Solo Living is on. Flip it off and the app switches to Full Pack \u2014 pack sizes, quantities and every product result change to family sizes instantly.', imgFirst: '', txtFirst: '' },
+        { cap: 'core app \u00b7 tracker', img: 'assets/app-tracker.webp', img2: '', single: true, title: 'A tracker you can set and top up', body: 'A ring reads your spend at a glance, with remaining and total-budget cards below. The pencil lets you set or add to the budget, and it resets automatically on the 1st of every month.', imgFirst: 'order:2', txtFirst: 'order:1' },
+        { cap: 'product \u00b7 details', img: 'assets/app-pdp.webp', img2: 'assets/app-pdp-sheet.webp', single: false, title: 'Every detail, one tap away', body: 'The product page keeps it simple \u2014 price, rating, quantity. Tap \u201cProduct details\u201d and a bottom sheet slides up with highlights, brand, disclaimer and customer care, so you never leave the product to make up your mind.', imgFirst: '', txtFirst: '' },
+        { cap: 'cart \u00b7 price breakdown', img: 'assets/app-cart.webp', img2: '', single: true, title: 'The full price, offers and all', body: 'Adding to cart opens the complete breakdown \u2014 item price against MRP, the savings, and any offers you can still apply before you check out.', imgFirst: 'order:2', txtFirst: 'order:1' },
+        { cap: 'order \u00b7 live tracking', img: 'assets/app-order.webp', img2: '', single: true, title: 'Watch it come to your door', body: 'The order screen is a live map with the ETA in big minutes, your delivery partner one tap away, and the exact items on the way.', imgFirst: '', txtFirst: '' },
+      ],
+    };
+  }
+
+  componentDidMount() {
+    this._cleanup = [];
+    const root = this.root || document;
+
+    const header = root.querySelector('header');
+    if (header) {
+      const links = [...header.querySelectorAll('a')];
+      links.forEach((a) => { a.dataset._oc = a.style.color || ''; a.dataset._ob = a.style.background || ''; });
+      const darks = [...root.querySelectorAll('[data-nav-dark]')];
+      let darkNow = null;
+      const setDark = (on) => {
+        if (on === darkNow) return; darkNow = on;
+        header.style.background = on ? 'rgba(18,18,20,.5)' : 'rgba(250,250,247,.6)';
+        header.style.borderBottomColor = on ? 'rgba(255,255,255,.12)' : 'rgba(14,14,16,.06)';
+        links.forEach((a) => {
+          if (a.hasAttribute('data-cta')) { a.style.background = on ? '#FAFAF7' : a.dataset._ob; a.style.color = on ? '#0E0E10' : '#FAFAF7'; }
+          else { a.style.color = on ? '#FAFAF7' : a.dataset._oc; }
+        });
+      };
+      const navScroll = () => {
+        const band = header.offsetHeight * 0.55;
+        setDark(darks.some((d) => { const r = d.getBoundingClientRect(); return r.top <= band && r.bottom >= 0; }));
+      };
+      addEventListener('scroll', navScroll, { passive: true }); navScroll();
+      this._cleanup.push(() => removeEventListener('scroll', navScroll));
+    }
+
+    root.querySelectorAll('[data-magnetic]').forEach((el) => {
+      const s = parseFloat(el.getAttribute('data-magnetic')) || .3;
+      const mm = (e) => { const r = el.getBoundingClientRect(); el.style.transform = `translate(${(e.clientX - (r.left + r.width / 2)) * s}px,${(e.clientY - (r.top + r.height / 2)) * s}px)`; };
+      const lv = () => { el.style.transform = 'translate(0,0)'; };
+      el.style.transition = 'transform .35s cubic-bezier(.2,.8,.2,1)';
+      el.addEventListener('mousemove', mm); el.addEventListener('mouseleave', lv);
+      this._cleanup.push(() => { el.removeEventListener('mousemove', mm); el.removeEventListener('mouseleave', lv); });
+    });
+
+    const bar = root.querySelector('[data-progress]');
+    if (bar) {
+      const onScroll = () => {
+        const h = document.documentElement.scrollHeight - innerHeight;
+        bar.style.width = (h > 0 ? (scrollY / h) * 100 : 0) + '%';
+      };
+      addEventListener('scroll', onScroll, { passive: true }); onScroll();
+      this._cleanup.push(() => removeEventListener('scroll', onScroll));
+    }
+  }
+
+  componentWillUnmount() { (this._cleanup || []).forEach((f) => f()); }
+}
+</script>
+</body>
+</html>
