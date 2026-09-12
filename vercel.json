@@ -8,6 +8,7 @@
     { "source": "/Solarity", "destination": "/Solarity.dc.html" },
     { "source": "/CaseStudy", "destination": "/CaseStudy.dc.html" },
     { "source": "/ComingSoon", "destination": "/ComingSoon.dc.html" },
-    { "source": "/Zepto", "destination": "/Zepto.dc.html" }
+    { "source": "/Zepto", "destination": "/Zepto.dc.html" },
+    { "source": "/Rento", "destination": "/Rento.dc.html" }
   ]
 }
