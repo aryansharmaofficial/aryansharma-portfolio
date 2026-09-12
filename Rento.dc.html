@@ -27,7 +27,6 @@
   .probGrid{grid-template-columns:repeat(3,1fr)}
   .solGrid{grid-template-columns:repeat(2,1fr)}
   .capGrid{grid-template-columns:repeat(4,1fr)}
-  .swatchGrid{grid-template-columns:repeat(3,1fr)}
   @media (max-width:900px){
     .navDesk{display:none}
     .navBurger{display:flex}
@@ -36,7 +35,6 @@
     .probGrid{grid-template-columns:1fr}
     .solGrid{grid-template-columns:1fr}
     .capGrid{grid-template-columns:repeat(2,1fr)}
-    .swatchGrid{grid-template-columns:1fr}
   }
   .cta{position:relative;display:inline-flex;align-items:center;text-decoration:none}
   .cta .lbl{position:relative;display:inline-block;overflow:hidden;line-height:1.25}
@@ -59,8 +57,6 @@
   .phoneCap{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(14,14,16,.45)}
   .lift{transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s ease}
   .lift:hover{transform:translateY(-5px);box-shadow:0 18px 40px -22px rgba(176,20,47,.35)}
-  .swatch{transition:transform .35s cubic-bezier(.2,.8,.2,1)}
-  .swatch:hover{transform:translateY(-4px)}
   .procRow{border-top:1px solid rgba(14,14,16,.12);display:flex;align-items:center;gap:clamp(20px,3vw,50px);padding:clamp(20px,2.4vw,30px) 0}
 </style>
 </helmet>
@@ -199,24 +195,7 @@
   <section style="padding:clamp(60px,8vw,120px) clamp(20px,5vw,80px) clamp(20px,3vw,40px)">
     <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">06 &middot; Visual direction</span>
     <h2 style="margin:14px 0 clamp(30px,4vw,50px);font-weight:800;font-size:clamp(30px,4vw,58px);letter-spacing:-.03em;line-height:1">Colour palette &amp; typography</h2>
-
-    <div class="swatchGrid" style="display:grid;gap:clamp(18px,2vw,24px);margin-bottom:clamp(30px,4vw,50px)">
-      <sc-for list="{{ colorsView }}" as="c" hint-placeholder-count="3">
-        <button class="swatch" onclick="{{ c.onClick }}" style="all:unset;cursor:pointer;display:block;border-radius:20px;overflow:hidden">
-          <div style="height:clamp(120px,14vw,200px);background:{{ c.hex }};display:flex;align-items:flex-end;padding:16px">
-            <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;padding:6px 12px;border-radius:100px;background:rgba(255,255,255,.9);color:#0E0E10">{{ c.label }}</span>
-          </div>
-        </button>
-      </sc-for>
-    </div>
-
-    <div style="border-radius:20px;background:var(--ac);color:#fff;padding:clamp(30px,4vw,50px);display:flex;flex-wrap:wrap;align-items:center;gap:clamp(24px,3vw,40px)">
-      <span style="font-weight:900;font-size:clamp(60px,7vw,110px);line-height:1">Aa</span>
-      <div>
-        <span style="font-weight:800;font-size:clamp(24px,2.2vw,32px);display:block;margin-bottom:10px">Inter</span>
-        <span style="font-size:clamp(13px,1vw,14px);letter-spacing:.04em;color:rgba(255,255,255,.85)">Regular &middot; Medium &middot; Semibold &middot; Bold</span>
-      </div>
-    </div>
+    <img src="assets/rento-palette.webp" alt="Colour palette — Rento Red #FF385C, Ink #15171C, Surface #FAFAFA — and Inter type sample in Regular, Medium, Semibold and Bold" loading="lazy" style="display:block;width:100%;height:auto;border-radius:20px" />
   </section>
 
   <!-- UI SCREENS -->
@@ -254,10 +233,7 @@
 
   <!-- THANK YOU -->
   <section style="padding:0 clamp(20px,5vw,80px) clamp(60px,8vw,110px)">
-    <div style="border-radius:28px;background:var(--ac);color:#fff;padding:clamp(60px,10vw,150px) clamp(30px,5vw,60px);text-align:center">
-      <h2 style="margin:0;font-weight:900;font-size:clamp(48px,7vw,100px);letter-spacing:-.03em;line-height:1">Thank you</h2>
-      <p style="margin:clamp(18px,2.4vw,28px) auto 0;max-width:44ch;font-size:clamp(16px,1.4vw,20px);line-height:1.55;color:rgba(255,255,255,.9)">Rento set out to answer one question: what is the smallest set of guarantees that lets two strangers exchange a set of keys?</p>
-    </div>
+    <img src="assets/rento-thankyou.webp" alt="Thank you — Rento set out to answer one question: what is the smallest set of guarantees that lets two strangers exchange a set of keys?" loading="lazy" style="display:block;width:100%;height:auto;border-radius:28px" />
   </section>
 
   <!-- FOOTER -->
@@ -293,24 +269,8 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#FF385C&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { copied: null };
   renderVals() {
     const ac = this.props.accent || '#FF385C';
-
-    const rawColors = [
-      { name: 'Rento Red', hex: '#FF385C' },
-      { name: 'Ink', hex: '#15171C' },
-      { name: 'Surface', hex: '#FAFAFA' },
-    ];
-    const colorsView = rawColors.map((c, i) => ({
-      hex: c.hex,
-      label: this.state.copied === i ? 'Copied ✓' : `${c.name} · ${c.hex}`,
-      onClick: () => {
-        try { navigator.clipboard && navigator.clipboard.writeText(c.hex); } catch (e) {}
-        this.setState({ copied: i });
-        setTimeout(() => this.setState((st) => (st.copied === i ? { copied: null } : null)), 1300);
-      },
-    }));
 
     return {
       ac,
@@ -346,7 +306,6 @@ class Component extends DCLogic {
         { no: '02', title: 'Short-term access is priced for the wrong user', body: 'Traditional rental is built around a counter, minimum duration and a stack of paperwork. Students, tourists, gig workers and people newly arrived in a city need a vehicle for four hours or two days — not a week. The friction and the minimum spend both land in the wrong place, so the trip simply does not happen.' },
         { no: '03', title: 'Renting from a stranger carries unpriced risk', body: 'Peer-to-peer works only when both people can see what protects them. Without verified identity, insurance, a deposit mechanism and an enforceable agreement, the owner is exposed to damage and the renter is exposed to disputes. Faced with unpriced risk, both sides default to no.' },
       ],
-      colorsView,
       topScreens: [
         { title: 'Home', body: 'Personalised entry point with search, categories and nearby vehicles.' },
         { title: 'Search · List', body: 'Filtered results with verified host and distance.' },
