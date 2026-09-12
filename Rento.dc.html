@@ -25,7 +25,7 @@
   .twoCol{grid-template-columns:0.85fr 1.15fr}
   .metaGrid{grid-template-columns:repeat(4,1fr)}
   .probGrid{grid-template-columns:repeat(3,1fr)}
-  .solGrid{grid-template-columns:repeat(2,1fr)}
+  .solGrid{grid-template-columns:repeat(4,1fr)}
   .capGrid{grid-template-columns:repeat(4,1fr)}
   @media (max-width:900px){
     .navDesk{display:none}
@@ -33,7 +33,7 @@
     .twoCol{grid-template-columns:1fr;gap:20px}
     .metaGrid{grid-template-columns:repeat(2,1fr)}
     .probGrid{grid-template-columns:1fr}
-    .solGrid{grid-template-columns:1fr}
+    .solGrid{grid-template-columns:repeat(2,1fr)}
     .capGrid{grid-template-columns:repeat(2,1fr)}
   }
   .cta{position:relative;display:inline-flex;align-items:center;text-decoration:none}
@@ -58,6 +58,7 @@
   .lift{transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s ease}
   .lift:hover{transform:translateY(-5px);box-shadow:0 18px 40px -22px rgba(176,20,47,.35)}
   .procRow{border-top:1px solid rgba(14,14,16,.12);display:flex;align-items:center;gap:clamp(20px,3vw,50px);padding:clamp(20px,2.4vw,30px) 0}
+  .procRow:first-child{border-top:none}
 </style>
 </helmet>
 <div ref="{{ rootRef }}" style="--ac:{{ ac }};position:relative;background:#FAFAF7;color:#0E0E10;font-family:'Archivo',sans-serif;overflow-x:clip;min-height:100vh">
@@ -144,16 +145,16 @@
   </section>
 
   <!-- SOLUTION -->
-  <section style="padding:clamp(60px,8vw,110px) clamp(20px,5vw,80px);background:#FFF0F1">
+  <section style="padding:clamp(60px,8vw,110px) clamp(20px,5vw,80px)">
     <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.5)">03 &middot; Solution</span>
     <h3 style="margin:14px 0 clamp(16px,1.8vw,22px);font-weight:800;font-size:clamp(23px,2.8vw,38px);letter-spacing:-.02em">How we solved it</h3>
     <p style="margin:0 0 clamp(30px,3.4vw,44px);max-width:68ch;font-size:clamp(15px,1.15vw,17px);line-height:1.65;color:rgba(14,14,16,.68)">Rento does not try to be a cheaper rental company. It is a trust layer with a booking flow attached. Four guarantees carry every transaction, and each one is surfaced in the interface before money moves &mdash; not afterwards.</p>
     <div class="solGrid" style="display:grid;gap:clamp(20px,2.4vw,28px)">
       <sc-for list="{{ guarantees }}" as="g" hint-placeholder-count="4">
-        <div class="lift" style="background:#fff;border-radius:20px;padding:clamp(26px,2.8vw,36px)">
-          <span style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:#FFF0F1;font-family:'Space Mono',monospace;font-size:12px;color:var(--ac);font-weight:700">{{ g.no }}</span>
-          <h4 style="margin:16px 0 12px;font-weight:800;font-size:clamp(19px,1.6vw,24px);letter-spacing:-.01em;line-height:1.25">{{ g.title }}</h4>
-          <p style="margin:0;font-size:clamp(15px,1.1vw,16px);line-height:1.6;color:rgba(14,14,16,.66)">{{ g.body }}</p>
+        <div class="lift" style="background:#fff;border:1px solid rgba(14,14,16,.1);border-radius:20px;padding:clamp(26px,2.8vw,32px)">
+          <span style="font-family:'Space Mono',monospace;font-size:13px;color:var(--ac);font-weight:700">{{ g.no }}</span>
+          <h4 style="margin:clamp(24px,3vw,40px) 0 12px;font-weight:800;font-size:clamp(19px,1.4vw,22px);letter-spacing:-.01em;line-height:1.25">{{ g.title }}</h4>
+          <p style="margin:0;font-size:clamp(14px,1vw,15px);line-height:1.6;color:rgba(14,14,16,.6)">{{ g.body }}</p>
         </div>
       </sc-for>
     </div>
@@ -182,7 +183,7 @@
     <p style="margin:0 0 clamp(30px,3.4vw,44px);max-width:70ch;font-size:clamp(15px,1.15vw,17px);line-height:1.65;color:rgba(14,14,16,.68)">It was to find precisely where peer-to-peer rental breaks in an Indian context, and what the smallest set of guarantees is that would carry a first transaction between two strangers. Three things came back.</p>
     <div class="probGrid" style="display:grid;gap:clamp(20px,2.4vw,28px)">
       <sc-for list="{{ findings }}" as="f" hint-placeholder-count="3">
-        <div class="lift" style="display:flex;flex-direction:column;background:#201C1C;border-radius:24px;padding:clamp(26px,2.8vw,38px);min-height:clamp(300px,28vw,400px)">
+        <div class="lift" style="display:flex;flex-direction:column;background:#303030;border-radius:24px;padding:clamp(26px,2.8vw,38px);min-height:clamp(300px,28vw,400px)">
           <span style="display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.28);font-family:'Space Mono',monospace;font-size:13px;color:#fff;font-weight:700">{{ f.no }}</span>
           <h4 style="margin:auto 0 12px;font-weight:800;font-size:clamp(20px,1.7vw,25px);letter-spacing:-.01em;line-height:1.2;color:#fff">{{ f.title }}</h4>
           <p style="margin:0;font-size:clamp(15px,1.1vw,16px);line-height:1.6;color:rgba(255,255,255,.62)">{{ f.body }}</p>
@@ -234,8 +235,8 @@
   </section>
 
   <!-- THANK YOU -->
-  <section style="padding:0 clamp(20px,5vw,80px) clamp(60px,8vw,110px)">
-    <img src="assets/rento-thankyou.webp" alt="Thank you — Rento set out to answer one question: what is the smallest set of guarantees that lets two strangers exchange a set of keys?" loading="lazy" style="display:block;width:100%;height:auto;border-radius:28px" />
+  <section style="padding:0 0 clamp(60px,8vw,110px)">
+    <img src="assets/rento-thankyou.webp" alt="Thank you — Rento set out to answer one question: what is the smallest set of guarantees that lets two strangers exchange a set of keys?" loading="lazy" style="display:block;width:100%;height:auto" />
   </section>
 
   <!-- FOOTER -->
