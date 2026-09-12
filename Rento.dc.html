@@ -209,10 +209,10 @@
   </section>
 
   <section style="padding:clamp(24px,3vw,44px) clamp(20px,5vw,80px) clamp(50px,6vw,80px)">
-    <img src="assets/rento-ui-top.webp" alt="Home, Search list, Search map and Vehicle detail screens" loading="lazy" style="display:block;width:100%;height:auto;border-radius:16px" />
-    <div class="capGrid" style="display:grid;gap:clamp(18px,2vw,26px);margin-top:clamp(24px,2.6vw,32px)">
+    <div class="capGrid" style="display:grid;gap:clamp(18px,2vw,26px)">
       <sc-for list="{{ topScreens }}" as="s" hint-placeholder-count="4">
         <div>
+          <img src="{{ s.img }}" alt="{{ s.title }} screen" loading="lazy" style="display:block;width:100%;height:auto;margin-bottom:16px" />
           <h4 style="margin:0 0 6px;font-weight:800;font-size:clamp(16px,1.2vw,18px);letter-spacing:-.01em">{{ s.title }}</h4>
           <p style="margin:0;font-size:clamp(13px,1vw,14px);line-height:1.55;color:rgba(14,14,16,.6)">{{ s.body }}</p>
         </div>
@@ -223,10 +223,10 @@
   <section style="padding:0 clamp(20px,5vw,80px) clamp(70px,9vw,120px)">
     <h3 style="margin:0 0 10px;font-weight:800;font-size:clamp(23px,2.8vw,38px);letter-spacing:-.02em">The booking flow</h3>
     <p style="margin:0 0 clamp(28px,3vw,40px);max-width:68ch;font-size:clamp(15px,1.15vw,17px);line-height:1.65;color:rgba(14,14,16,.68)">The sequence that carries the trust argument: what you are booking, what you are agreeing to, what you are paying, and how you collect the vehicle. Verification and the signed agreement both resolve before payment.</p>
-    <img src="assets/rento-ui-bottom.webp" alt="Booking, Agreement, Payment and Confirmed screens" loading="lazy" style="display:block;width:100%;height:auto;border-radius:16px" />
-    <div class="capGrid" style="display:grid;gap:clamp(18px,2vw,26px);margin-top:clamp(24px,2.6vw,32px)">
+    <div class="capGrid" style="display:grid;gap:clamp(18px,2vw,26px)">
       <sc-for list="{{ bottomScreens }}" as="s" hint-placeholder-count="4">
         <div>
+          <img src="{{ s.img }}" alt="{{ s.title }} screen" loading="lazy" style="display:block;width:100%;height:auto;margin-bottom:16px" />
           <h4 style="margin:0 0 6px;font-weight:800;font-size:clamp(16px,1.2vw,18px);letter-spacing:-.01em">{{ s.title }}</h4>
           <p style="margin:0;font-size:clamp(13px,1vw,14px);line-height:1.55;color:rgba(14,14,16,.6)">{{ s.body }}</p>
         </div>
@@ -310,16 +310,16 @@ class Component extends DCLogic {
         { no: '03', title: 'Renting from a stranger carries unpriced risk', body: 'Peer-to-peer works only when both people can see what protects them. Without verified identity, insurance, a deposit mechanism and an enforceable agreement, the owner is exposed to damage and the renter is exposed to disputes. Faced with unpriced risk, both sides default to no.' },
       ],
       topScreens: [
-        { title: 'Home', body: 'Personalised entry point with search, categories and nearby vehicles.' },
-        { title: 'Search · List', body: 'Filtered results with verified host and distance.' },
-        { title: 'Search · Map', body: 'Price pins with a preview card for the selected vehicle.' },
-        { title: 'Vehicle detail', body: 'Gallery, specs, host credibility and cancellation terms.' },
+        { title: 'Home', body: 'Personalised entry point with search, categories and nearby vehicles.', img: 'assets/rento-screen-home.webp' },
+        { title: 'Search · List', body: 'Filtered results with verified host and distance.', img: 'assets/rento-screen-search-list.webp' },
+        { title: 'Search · Map', body: 'Price pins with a preview card for the selected vehicle.', img: 'assets/rento-screen-search-map.webp' },
+        { title: 'Vehicle detail', body: 'Gallery, specs, host credibility and cancellation terms.', img: 'assets/rento-screen-detail.webp' },
       ],
       bottomScreens: [
-        { title: 'Booking', body: 'Trip window, pickup point and full price breakdown.' },
-        { title: 'Agreement', body: 'Both parties, terms and the signature gate.' },
-        { title: 'Payment', body: 'Total payable, deposit hold and payment method.' },
-        { title: 'Confirmed', body: 'QR pickup pass and booking reference.' },
+        { title: 'Booking', body: 'Trip window, pickup point and full price breakdown.', img: 'assets/rento-screen-booking.webp' },
+        { title: 'Agreement', body: 'Both parties, terms and the signature gate.', img: 'assets/rento-screen-agreement.webp' },
+        { title: 'Payment', body: 'Total payable, deposit hold and payment method.', img: 'assets/rento-screen-payment.webp' },
+        { title: 'Confirmed', body: 'QR pickup pass and booking reference.', img: 'assets/rento-screen-confirmed.webp' },
       ],
     };
   }
