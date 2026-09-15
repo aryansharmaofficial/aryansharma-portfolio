@@ -43,6 +43,7 @@
     .cardRow{grid-template-columns:1fr}
     .heroGrid{grid-template-columns:1fr}
     .heroImg{display:none}
+    .heroIntroLine{white-space:normal !important;font-size:15px !important}
   }
   header{transition:background .45s ease,border-color .45s ease}
   header a, header [data-cta], header .navBurger span{transition:color .4s ease,background .4s ease,border-color .4s ease}
@@ -70,7 +71,7 @@
   .cta-fixed .arrFix{position:absolute;right:20px;top:50%;color:var(--ac);font-weight:700;opacity:0;transform:translate(-6px,-50%);transition:opacity .35s ease,transform .42s cubic-bezier(.65,0,.2,1)}
   .cta-fixed:hover .arrFix{opacity:1;transform:translate(0,-50%)}
   .cta-outline{border:2px solid var(--ac);transition:background .4s ease,color .4s ease,border-color .4s ease}
-  .cta-outline:hover{background:rgba(43,77,244,0) !important;color:var(--ac) !important}
+  .cta-outline:hover{background:#fff !important;color:var(--ac) !important;border-color:var(--ac) !important}
   header[data-dark] .navBurger span{background:#FAFAF7 !important}
   header[data-dark] [data-cta]{background:#FAFAF7 !important;color:#0E0E10 !important}
 </style>
@@ -113,40 +114,41 @@
   <button onClick="{{ closeMenu }}" aria-label="Close" style="{{ closeBtnStyle }}">&times;</button>
 
   <!-- ============ HERO ============ -->
-  <section style="position:relative;padding:clamp(26px,4vw,56px) clamp(20px,5vw,80px) clamp(22px,3vw,40px);min-height:calc(100svh - 66px);display:flex;flex-direction:column;justify-content:center">
-    <div class="heroGrid">
-    <div data-parallax="1" style="will-change:transform;position:relative;z-index:1">
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:clamp(18px,2.5vw,34px)">
-        <span style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(14,14,16,.55)">(01)&nbsp;&nbsp;Portfolio &middot; 2026</span>
-        <span style="flex:1;height:1px;background:rgba(14,14,16,.14);max-width:200px"></span>
+  <section data-hero-section style="position:relative;overflow:hidden;padding:clamp(20px,3.2vw,48px) clamp(20px,5vw,80px) clamp(18px,2.6vw,34px);min-height:calc(100svh - 66px);display:flex;flex-direction:column;justify-content:center">
+    <canvas data-hero-canvas style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block"></canvas>
+    <div class="heroGrid" style="position:relative;z-index:1">
+    <div data-parallax="1" style="will-change:transform;position:relative;z-index:1;max-width:960px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center">
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:clamp(12px,2vw,22px)">
+        <span style="font-family:'Space Mono',monospace;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:rgba(14,14,16,.55)">(01)&nbsp;&nbsp;Portfolio &middot; 2026</span>
       </div>
 
-      <p style="font-size:clamp(20px,2.6vw,30px);font-weight:500;margin:0 0 clamp(4px,1vw,10px);color:rgba(14,14,16,.7)">
+      <p style="font-size:clamp(22px,2.8vw,32px);font-weight:500;margin:0 0 clamp(4px,1vw,10px);color:rgba(14,14,16,.7)">
         Hi, I&rsquo;m Aryan Sharma <span style="display:inline-block;animation:blink 1.1s step-end infinite;font-weight:400">|</span>
       </p>
 
-      <h1 style="margin:0;font-weight:900;line-height:.82;letter-spacing:-.045em;font-size:clamp(46px,min(10.5vw,15.5vh),170px);text-transform:uppercase">
+      <h1 style="margin:0;font-weight:900;line-height:.82;letter-spacing:-.045em;font-size:clamp(50px,min(11.2vw,16.5vh),182px);text-transform:uppercase">
         <span style="display:block">UX &amp;</span>
         <span style="display:block">Product</span>
         <span style="display:block">Designer</span>
       </h1>
 
-      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,2vw,28px);margin-top:clamp(26px,3.5vw,48px)">
-        <a href="/Work" class="cta cta-outline" style="text-decoration:none;background:var(--ac);color:#fff;font-weight:600;font-size:clamp(15px,1.3vw,18px);padding:15px 30px;border-radius:100px">
+      <p class="heroIntroLine" style="margin:clamp(20px,3vw,40px) 0 0;font-size:clamp(13px,1.05vw,17px);line-height:1.5;color:rgba(14,14,16,.62);white-space:nowrap">
+        I build consumer and enterprise products <a href="#about" data-cursor="link" style="color:#0E0E10;font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--ac);white-space:nowrap">@ Onething Design</a>.
+      </p>
+
+      <div style="display:flex;justify-content:center;margin-top:clamp(14px,2vw,24px)">
+        <a href="/Work" class="cta cta-outline" style="text-decoration:none;background:var(--ac);color:#fff;font-weight:600;font-size:clamp(16px,1.35vw,19px);padding:16px 32px;border-radius:100px">
           <span class="lbl">
             <span>See selected work&nbsp;&nbsp;<span style="display:inline-block;font-weight:700">&rarr;</span></span>
             <span>See selected work&nbsp;&nbsp;<span style="display:inline-block;font-weight:700">&rarr;</span></span>
           </span>
         </a>
-        <p style="margin:0;max-width:360px;font-size:clamp(15px,1.15vw,17px);line-height:1.5;color:rgba(14,14,16,.62)">
-          I build consumer and enterprise products <a href="#about" data-cursor="link" style="color:#0E0E10;font-weight:600;text-decoration:none;border-bottom:1.5px solid var(--ac);white-space:nowrap">@ Onething Design</a>.
-        </p>
       </div>
     </div>
     </div>
 
     <!-- hero base rail -->
-    <div style="position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;margin-top:auto;padding-top:clamp(28px,4vw,56px)">
+    <div style="position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;margin-top:auto;padding-top:clamp(20px,3vw,44px)">
       <div class="rail" style="align-items:center;gap:30px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(14,14,16,.55)">
         <span>Based in Gurugram, IN</span>
         <span style="display:inline-flex;align-items:center;gap:7px"><span style="width:7px;height:7px;border-radius:50%;background:var(--ac)"></span>Available for work</span>
@@ -408,6 +410,182 @@ class Component extends DCLogic {
       hero.style.transition = 'transform .5s cubic-bezier(.2,.8,.2,1)';
       addEventListener('mousemove', pm);
       this._cleanup.push(() => removeEventListener('mousemove', pm));
+    }
+
+    // ---- hero interactive line network (canvas) ----
+    const heroSection = root.querySelector('[data-hero-section]');
+    const heroCanvas = root.querySelector('[data-hero-canvas]');
+    if (heroSection && heroCanvas && heroCanvas.getContext) {
+      const hctx = heroCanvas.getContext('2d');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const hexToRgb = (hex) => {
+        const h = hex.replace('#', '');
+        const b = h.length === 3 ? h.split('').map((c) => c + c).join('') : h;
+        const num = parseInt(b, 16) || 0x2B4DF4;
+        return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
+      };
+      const [AR, AG, AB] = hexToRgb(ac);
+      let hW = 0, hH = 0, hDpr = Math.min(window.devicePixelRatio || 1, 2), hPts = [];
+      const hMouse = { x: -9999, y: -9999, active: false };
+      const GUTTER_LABELS = [
+        { t: 'UX Design', c: '#2B4DF4' },
+        { t: 'Figma', c: '#F2545B' },
+        { t: 'AI Design', c: '#16A34A' },
+        { t: 'Design Systems', c: '#8B5CF6' },
+        { t: 'Prototyping', c: '#F59E0B' },
+        { t: 'User Research', c: '#06AED4' },
+        { t: 'Agentic Design', c: '#EC4899' },
+      ];
+      const CHIP_FONT = "600 12px 'Space Mono', monospace";
+      const CHIP_PAD_X = 10, CHIP_GAP = 12, CHIP_H = 24;
+      const hResize = () => {
+        const r = heroSection.getBoundingClientRect();
+        hW = r.width; hH = r.height;
+        heroCanvas.width = Math.round(hW * hDpr);
+        heroCanvas.height = Math.round(hH * hDpr);
+        heroCanvas.style.width = hW + 'px';
+        heroCanvas.style.height = hH + 'px';
+        hctx.setTransform(hDpr, 0, 0, hDpr, 0, 0);
+        const count = Math.round((hW * hH) / 24000);
+        hPts = Array.from({ length: Math.max(16, Math.min(64, count)) }, () => ({
+          x: Math.random() * hW,
+          y: Math.random() * hH,
+          vx: (Math.random() - .5) * .16,
+          vy: (Math.random() - .5) * .16,
+          label: null, labelColor: null, chipW: 0,
+          lx0: 0, lx1: hW, ly0: 0, ly1: hH, labelSide: 'left',
+        }));
+        // ---- pin a few points as floating skill tags, each confined to its own lane so they never drift into the headline, each other, or the floating note ----
+        if (hW > 1280) {
+          const gutter = Math.max(150, Math.min(260, hW * 0.17));
+          const centerHalf = Math.min(510, hW * 0.26);
+          const leftMax = hW / 2 - centerHalf;
+          const rightMin = hW / 2 + centerHalf;
+          const edgeGuard = 24;
+          const topY = hH * 0.16, botY = hH * 0.82;
+          const n = Math.min(GUTTER_LABELS.length, hPts.length);
+          const leftIdx = [], rightIdx = [];
+          for (let i = 0; i < n; i++) (i % 2 === 0 ? leftIdx : rightIdx).push(i);
+          const placeSide = (idxArr, onLeft) => {
+            const cnt = idxArr.length;
+            const span = botY - topY;
+            const bandH = span / cnt;
+            idxArr.forEach((i, slot) => {
+              const p = hPts[i];
+              const def = GUTTER_LABELS[i];
+              p.labelSide = onLeft ? 'left' : 'right';
+              hctx.font = CHIP_FONT;
+              p.chipW = hctx.measureText(def.t).width + CHIP_PAD_X * 2;
+              if (onLeft) {
+                p.lx0 = Math.max(edgeGuard + CHIP_GAP + p.chipW, leftMax - gutter);
+                p.lx1 = leftMax;
+              } else {
+                const rightCap = hW - edgeGuard - CHIP_GAP - p.chipW;
+                p.lx0 = rightMin;
+                p.lx1 = Math.max(rightMin, Math.min(rightMin + gutter, rightCap));
+              }
+              if (p.lx1 - p.lx0 < 24) return; // not enough room on this viewport — leave as a plain network node
+              p.label = def.t;
+              p.labelColor = hexToRgb(def.c);
+              p.x = p.lx0 + Math.random() * Math.max(1, p.lx1 - p.lx0);
+              p.ly0 = topY + slot * bandH + CHIP_H / 2 + 4;
+              p.ly1 = topY + (slot + 1) * bandH - CHIP_H / 2 - 4;
+              if (p.ly1 <= p.ly0) { p.ly0 = topY; p.ly1 = botY; }
+              p.y = p.ly0 + Math.random() * Math.max(1, p.ly1 - p.ly0);
+              p.vx = (Math.random() - .5) * .07;
+              p.vy = (Math.random() - .5) * .07;
+            });
+          };
+          placeSide(leftIdx, true);
+          placeSide(rightIdx, false);
+        }
+      };
+      hResize();
+      const hMove = (e) => {
+        const r = heroSection.getBoundingClientRect();
+        hMouse.x = e.clientX - r.left; hMouse.y = e.clientY - r.top; hMouse.active = true;
+      };
+      const hLeave = () => { hMouse.active = false; };
+      const LINK_D = 150, MOUSE_D = 210;
+      const hDraw = () => {
+        hctx.clearRect(0, 0, hW, hH);
+        for (const p of hPts) {
+          p.x += p.vx; p.y += p.vy;
+          const minX = p.label ? p.lx0 : 0, maxX = p.label ? p.lx1 : hW;
+          const minY = p.label ? p.ly0 : 0, maxY = p.label ? p.ly1 : hH;
+          if (p.x <= minX || p.x >= maxX) p.vx *= -1;
+          if (p.y <= minY || p.y >= maxY) p.vy *= -1;
+          p.x = Math.max(minX, Math.min(maxX, p.x));
+          p.y = Math.max(minY, Math.min(maxY, p.y));
+        }
+        for (let i = 0; i < hPts.length; i++) {
+          for (let j = i + 1; j < hPts.length; j++) {
+            const dx = hPts[i].x - hPts[j].x, dy = hPts[i].y - hPts[j].y;
+            const d = Math.hypot(dx, dy);
+            if (d < LINK_D) {
+              const tint = hPts[i].labelColor || hPts[j].labelColor;
+              const op = (1 - d / LINK_D) * (tint ? .22 : .14);
+              hctx.strokeStyle = tint ? `rgba(${tint[0]},${tint[1]},${tint[2]},${op})` : `rgba(14,14,16,${op})`;
+              hctx.lineWidth = 1;
+              hctx.beginPath(); hctx.moveTo(hPts[i].x, hPts[i].y); hctx.lineTo(hPts[j].x, hPts[j].y); hctx.stroke();
+            }
+          }
+          if (hMouse.active) {
+            const dx = hPts[i].x - hMouse.x, dy = hPts[i].y - hMouse.y;
+            const d = Math.hypot(dx, dy);
+            if (d < MOUSE_D) {
+              const [lr, lg, lb] = hPts[i].labelColor || [AR, AG, AB];
+              hctx.strokeStyle = `rgba(${lr},${lg},${lb},${(1 - d / MOUSE_D) * .5})`;
+              hctx.lineWidth = 1.2;
+              hctx.beginPath(); hctx.moveTo(hPts[i].x, hPts[i].y); hctx.lineTo(hMouse.x, hMouse.y); hctx.stroke();
+            }
+          }
+          const pt = hPts[i];
+          const nearMouse = hMouse.active && Math.hypot(pt.x - hMouse.x, pt.y - hMouse.y) < MOUSE_D;
+          if (pt.label) {
+            const [cr, cg, cb] = pt.labelColor;
+            hctx.fillStyle = `rgba(${cr},${cg},${cb},${nearMouse ? .85 : .55})`;
+            hctx.beginPath(); hctx.arc(pt.x, pt.y, nearMouse ? 3.2 : 2.8, 0, Math.PI * 2); hctx.fill();
+            hctx.font = CHIP_FONT;
+            hctx.textBaseline = 'middle';
+            const chipX = pt.labelSide === 'left' ? pt.x - CHIP_GAP - pt.chipW : pt.x + CHIP_GAP;
+            const chipY = pt.y - CHIP_H / 2, r = CHIP_H / 2;
+            hctx.beginPath();
+            hctx.moveTo(chipX + r, chipY);
+            hctx.arcTo(chipX + pt.chipW, chipY, chipX + pt.chipW, chipY + CHIP_H, r);
+            hctx.arcTo(chipX + pt.chipW, chipY + CHIP_H, chipX, chipY + CHIP_H, r);
+            hctx.arcTo(chipX, chipY + CHIP_H, chipX, chipY, r);
+            hctx.arcTo(chipX, chipY, chipX + pt.chipW, chipY, r);
+            hctx.closePath();
+            hctx.fillStyle = `rgba(${cr},${cg},${cb},${nearMouse ? .16 : .08})`;
+            hctx.fill();
+            hctx.strokeStyle = `rgba(${cr},${cg},${cb},${nearMouse ? .6 : .32})`;
+            hctx.lineWidth = 1;
+            hctx.stroke();
+            hctx.fillStyle = `rgba(${cr},${cg},${cb},${nearMouse ? .95 : .8})`;
+            hctx.textAlign = 'left';
+            hctx.fillText(pt.label, chipX + CHIP_PAD_X, pt.y);
+          } else {
+            hctx.fillStyle = 'rgba(14,14,16,.3)';
+            hctx.beginPath(); hctx.arc(pt.x, pt.y, 1.6, 0, Math.PI * 2); hctx.fill();
+          }
+        }
+        if (hMouse.active) {
+          hctx.fillStyle = `rgb(${AR},${AG},${AB})`;
+          hctx.beginPath(); hctx.arc(hMouse.x, hMouse.y, 3, 0, Math.PI * 2); hctx.fill();
+        }
+        if (!reduceMotion) this._heroRaf = requestAnimationFrame(hDraw);
+      };
+      heroSection.addEventListener('mousemove', hMove);
+      heroSection.addEventListener('mouseleave', hLeave);
+      addEventListener('resize', hResize);
+      hDraw();
+      this._cleanup.push(() => {
+        heroSection.removeEventListener('mousemove', hMove);
+        heroSection.removeEventListener('mouseleave', hLeave);
+        removeEventListener('resize', hResize);
+        cancelAnimationFrame(this._heroRaf);
+      });
     }
 
     // ---- lazy-load card cover images (avoids streaming hole fetch) ----
